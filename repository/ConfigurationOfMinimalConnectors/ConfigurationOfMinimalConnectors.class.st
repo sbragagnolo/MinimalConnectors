@@ -97,7 +97,6 @@ ConfigurationOfMinimalConnectors >> baseline01: spec [
 			package: 'MinimalConnectors-CurvesAndArrows';
 			package: 'MinimalConnectors-ConnectableShapes';
 			package: 'MinimalConnectors-Connections' with:[spec requires: 'MinimalConnectors-ConnectableShapes'];
-			package: 'SUML-DiagramDrawing' with: [ spec requires: 'MinimalConnectors-Connections'.  ];
 
 			group: 'default' with: #('Core');
 			group: 'Core' with: #('MinimalConnectors-CurvesAndArrows' 'MinimalConnectors-Connections' 'MinimalConnectors-ConnectableShapes').
