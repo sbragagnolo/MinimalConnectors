@@ -94,8 +94,8 @@ ConfigurationOfMinimalConnectors >> baseline01: spec [
 		spec blessing: #baseline.
 		spec repository: 'http://www.squeaksource.com/MinimalConnectors'.	
 		spec 
-			package: 'MinimalConnectors-CurvesAndArrows';
 			package: 'MinimalConnectors-ConnectableShapes';
+			package: 'MinimalConnectors-CurvesAndArrows';
 			package: 'MinimalConnectors-Connections' with:[spec requires: 'MinimalConnectors-ConnectableShapes'];
 
 			group: 'default' with: #('Core');
