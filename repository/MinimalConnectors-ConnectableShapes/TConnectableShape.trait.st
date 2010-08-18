@@ -6,8 +6,8 @@ Trait {
 { #category : #'as yet unclassified' }
 TConnectableShape >> connectTo: anotherBox using: aConnection [
 	| origin destination |
-	origin := ConnectionPoint new.
-	destination := ConnectionPoint new.
+	origin := SingleConnectionPoint new.
+	destination := SingleConnectionPoint new.
 	self connectableBoundingBox addConnectionPoint: origin thatConnectsTo: anotherBox.
 	anotherBox connectableBoundingBox addConnectionPoint: destination thatConnectsTo:  self.
 	aConnection from: origin to: destination.
