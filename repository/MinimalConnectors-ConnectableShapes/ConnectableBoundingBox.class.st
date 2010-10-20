@@ -16,7 +16,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
-	(owner connectionBorderNear: aShape ) addMorph: aConnectionPoint .
+	(self connectionNear: aShape ) addMorph: aConnectionPoint .
 	 
 ]
 
@@ -37,6 +37,15 @@ ConnectableBoundingBox >> bounds: bounds2 [
 	super bounds: bounds2 
 ]
 
+{ #category : #'as yet unclassified' }
+ConnectableBoundingBox >> connectionNear: anotherClassBox [
+	self top > anotherClassBox bottom ifTrue:[^self  topBorder].
+	self bottom < anotherClassBox top ifTrue:[^self  bottomBorder].
+	self left > anotherClassBox right ifTrue:[^self  leftBorder].
+	self right < anotherClassBox left ifTrue:[^self  rightBorder].
+	^self  leftBorder
+]
+
 { #category : #'connection points' }
 ConnectableBoundingBox >> connectionPoints [
 	^self borders inject: OrderedCollection new into:[:points :border | points union: border submorphs ]
@@ -44,7 +53,7 @@ ConnectableBoundingBox >> connectionPoints [
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> connections [
-	^self submorphs select:[:sub | sub isKindOf: UMLConnection ]
+	^self submorphs select:[:sub | sub isKindOf: Connection ]
 ]
 
 { #category : #accessing }
