@@ -32,7 +32,7 @@ ConnectableBoundingCircle >> connectionNear: anotherClassBox [
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> connections [
-	^self submorphs select:[:sub | sub isKindOf: UMLConnection ]
+	^self submorphs select:[:sub | sub isKindOf: Connection ]
 ]
 
 { #category : #'as yet unclassified' }
