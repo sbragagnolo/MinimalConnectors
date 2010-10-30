@@ -97,32 +97,12 @@ ConnectableBoundingBox >> newBorder [
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> newHorizontalBorder [
 	^ (HorizontalConnectableBorder new)
-		color: Color transparent;
-		borderColor: Color transparent;
-		width: 1;
-		layoutPolicy: TableLayout new;
-		layoutInset: 0;
-		wrapCentering: #center;
-		cellPositioning: #center;
-		listCentering: #center;
-		hResizing: #spaceFill;
-		vResizing: #rigid
 ]
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> newVerticalBorder [
 	^ (VerticalConnectableBorder new)
-		color: Color transparent;
-		borderColor: Color transparent;
-		width: 1;
-		layoutPolicy: TableLayout new;
-		layoutInset: 0;
-		listDirection: #topToBottom;
-		wrapCentering: #center;
-		cellPositioning: #center;
-		listCentering: #center;
-		hResizing: #rigid;
-		vResizing: #spaceFill
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -144,13 +124,14 @@ ConnectableBoundingBox >> topBorder [
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> updateLayout [
 	self bounds: owner bounds.
-
+	self borders do: #updateLayout.
+	
 	self leftBorder center: self leftCenter - (3 @ 0).
 	self topBorder center: self topCenter "- (0 @ 2)". 
 	self rightBorder center: self rightCenter - (3 @ 0).
 	self bottomBorder center: self bottomCenter" - (0 @ 2)". 
 
-	self borders do: #updateLayout
+	
 
 ]
 

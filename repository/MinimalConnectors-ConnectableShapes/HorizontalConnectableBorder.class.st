@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+HorizontalConnectableBorder >> initialize [ 
+	super initialize.
+	self 
+		color: Color transparent;
+		borderColor: Color transparent;
+		layoutPolicy: TableLayout new;
+		layoutInset: 0;
+		listDirection: #leftToRight;
+		wrapCentering: #center;
+		cellPositioning: #center;
+		listCentering: #center;
+		hResizing: #spaceFill;
+		vResizing: #rigid
+]
+
+{ #category : #'as yet unclassified' }
 HorizontalConnectableBorder >> updateLayout [
 	self width: owner width.
 ]
