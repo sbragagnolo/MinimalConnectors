@@ -122,6 +122,11 @@ ConnectableBoundingBox >> topBorder [
 ]
 
 { #category : #'as yet unclassified' }
+ConnectableBoundingBox >> updateConnectionsLabel [ 
+	self borders do:[:border | border updateConnectionsLabel ]
+]
+
+{ #category : #'as yet unclassified' }
 ConnectableBoundingBox >> updateLayout [
 	self bounds: owner bounds.
 	self borders do: #updateLayout.
