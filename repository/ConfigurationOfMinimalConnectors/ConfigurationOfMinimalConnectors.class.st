@@ -163,7 +163,7 @@ ConfigurationOfMinimalConnectors >> version04: spec [
 		do: [ 
 			spec
 				blessing: #release;
-				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.9';
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.10';
 				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
 				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.4']
 ]
