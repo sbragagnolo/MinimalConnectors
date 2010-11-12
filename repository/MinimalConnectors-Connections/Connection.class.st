@@ -854,6 +854,11 @@ Connection >> headConnectionPoint [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+Connection >> headConnectionPointCenter [
+	^self headConnectionPoint center 
+]
+
 { #category : #'rotate scale' }
 Connection >> heading: newHeading [
 	"Set the receiver's heading (in eToy terms).
@@ -1369,6 +1374,12 @@ Connection >> tailConnectionPoint [
 	
 ]
 
+{ #category : #accessing }
+Connection >> tailConnectionPointCenter [
+	^ self tailConnectionPoint center
+	
+]
+
 { #category : #connecting }
 Connection >> to: destination [ 
 	self from: self tailConnectionPoint  to: destination 
@@ -1427,12 +1438,13 @@ Connection >> updateArrowContours [
 
 { #category : #'gaucho-created' }
 Connection >> updateHeadVertex [
-	self verticesAt: vertices size put: self headConnectionPoint center 
+	self verticesAt: vertices size put: self headConnectionPointCenter .
+
 ]
 
 { #category : #'gaucho-created' }
 Connection >> updateTailVertex [
-	self verticesAt: 1 put: self tailConnectionPoint center 
+	self verticesAt: 1 put: self tailConnectionPointCenter 
 ]
 
 { #category : #updating }

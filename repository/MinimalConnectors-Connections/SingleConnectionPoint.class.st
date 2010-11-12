@@ -20,7 +20,7 @@ SingleConnectionPoint >> attachTailOf: aConnector [
 
 { #category : #accessing }
 SingleConnectionPoint >> borderColor [
-	^Color transparent 
+	^Color transparent
 ]
 
 { #category : #accessing }
