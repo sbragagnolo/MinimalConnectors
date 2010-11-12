@@ -2,10 +2,7 @@ Class {
 	#name : #ConnectableBoundingCircle,
 	#superclass : #Morph,
 	#instVars : [
-		'topPoint',
-		'bottomPoint',
-		'leftPoint',
-		'rightPoint'
+		'points'
 	],
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
@@ -18,7 +15,7 @@ ConnectableBoundingCircle >> addConnectionPoint: aConnectionPoint thatConnectsTo
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> bottomPoint [
-	^bottomPoint ifNil:[bottomPoint:= ConnectablePoint new center: self bottomCenter]
+	^self points at: 3 ifAbsentPut:[ConnectablePoint new center: self bottomCenter]
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,6 +38,7 @@ ConnectableBoundingCircle >> initialize [
 	self color: Color transparent.
 	self borderColor: Color black.
 	
+	points := OrderedCollection new.
 	self addMorph: self leftPoint.
 	self addMorph: self rightPoint.
 	self addMorph: self topPoint.
@@ -49,17 +47,22 @@ ConnectableBoundingCircle >> initialize [
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> leftPoint [
-	^leftPoint ifNil:[leftPoint:= ConnectablePoint new center: self leftCenter]
+	^self points at: 4 ifAbsentPut:[ConnectablePoint new center: self leftCenter]
+]
+
+{ #category : #'as yet unclassified' }
+ConnectableBoundingCircle >> points [
+	^points
 ]
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> rightPoint [
-	^rightPoint ifNil:[rightPoint:= ConnectablePoint new center: self rightCenter]
+	^self points at: 2 ifAbsentPut:[ConnectablePoint new center: self rightCenter]
 ]
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> topPoint [
-	^topPoint ifNil:[topPoint:= ConnectablePoint new center: self topCenter]
+	^self points at: 1 ifAbsentPut:[ ConnectablePoint new center: self topCenter]
 ]
 
 { #category : #'as yet unclassified' }
