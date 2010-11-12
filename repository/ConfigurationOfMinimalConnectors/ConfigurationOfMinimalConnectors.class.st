@@ -131,6 +131,19 @@ ConfigurationOfMinimalConnectors >> version01: spec [
 
 { #category : #versions }
 ConfigurationOfMinimalConnectors >> version02: spec [
+	<version: '0.2' imports: #('0.1-baseline')>
+	spec
+		for: #common
+		do: [ 
+			spec
+				blessing: #release;
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.5';
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.7';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.2']
+]
+
+{ #category : #versions }
+ConfigurationOfMinimalConnectors >> version03: spec [
 	<version: '0.3' imports: #('0.1-baseline')>
 	spec
 		for: #common
@@ -140,4 +153,17 @@ ConfigurationOfMinimalConnectors >> version02: spec [
 				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.7';
 				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
 				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.3']
+]
+
+{ #category : #versions }
+ConfigurationOfMinimalConnectors >> version04: spec [
+	<version: '0.4' imports: #('0.1-baseline')>
+	spec
+		for: #common
+		do: [ 
+			spec
+				blessing: #release;
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.9';
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.4']
 ]
