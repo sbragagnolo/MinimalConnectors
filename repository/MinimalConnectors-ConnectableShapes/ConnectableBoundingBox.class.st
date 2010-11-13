@@ -6,10 +6,7 @@ Class {
 	#name : #ConnectableBoundingBox,
 	#superclass : #RectangleMorph,
 	#instVars : [
-		'leftBorder',
-		'topBorder',
-		'bottomBorder',
-		'rightBorder'
+		'borders'
 	],
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
@@ -20,15 +17,15 @@ ConnectableBoundingBox >> addConnectionPoint: aConnectionPoint thatConnectsTo: a
 	 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #borders }
 ConnectableBoundingBox >> borders [
-	^{self leftBorder . self bottomBorder . self rightBorder . self topBorder }
+	^borders
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #borders }
 ConnectableBoundingBox >> bottomBorder [
-	^bottomBorder ifNil:[bottomBorder := self newHorizontalBorder].
+	^self borders at: 3 ifAbsentPut:[ self newHorizontalBorder].
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,6 +67,7 @@ ConnectableBoundingBox >> delta [
 ConnectableBoundingBox >> initialize [ 
 	super initialize.
 	borderColor := Color gray.
+	borders := OrderedCollection new.
 	
 	self addMorph: self leftBorder.
 	self addMorph: self topBorder.
@@ -78,9 +76,9 @@ ConnectableBoundingBox >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #borders }
 ConnectableBoundingBox >> leftBorder [
-	^leftBorder ifNil:[leftBorder:= self newVerticalBorder].
+	^self borders at: 4 ifAbsentPut:[self newVerticalBorder].
 ]
 
 { #category : #'as yet unclassified' }
@@ -111,14 +109,14 @@ ConnectableBoundingBox >> noteNewOwner: aMorph [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #borders }
 ConnectableBoundingBox >> rightBorder [
-	^rightBorder ifNil:[rightBorder:= self newVerticalBorder].
+	^self borders at: 2 ifAbsentPut:[self newVerticalBorder].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #borders }
 ConnectableBoundingBox >> topBorder [
-	^topBorder ifNil:[topBorder:= self newHorizontalBorder].
+	^self borders at: 1 ifAbsentPut:[self newHorizontalBorder].
 ]
 
 { #category : #'as yet unclassified' }

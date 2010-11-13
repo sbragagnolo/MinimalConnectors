@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ConnectableBorder >> connectionPoints [
-	^self submorphs select:[:subMorph | subMorph isKindOf: SingleConnectionPoint ]
+	^self submorphs
 ]
 
 { #category : #'as yet unclassified' }
