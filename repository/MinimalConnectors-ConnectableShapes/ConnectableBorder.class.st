@@ -22,7 +22,7 @@ ConnectableBorder >> sortSubmorphsBy: aBlock [
 
 { #category : #'as yet unclassified' }
 ConnectableBorder >> updateConnectionsLabel [ 
-	self connectionPoints do:[:point | point connections do:[:conn | conn  updateLabel.]]
+	self connectionPoints do:[:point | point updateConnectionsLabel ]
 ]
 
 { #category : #'as yet unclassified' }

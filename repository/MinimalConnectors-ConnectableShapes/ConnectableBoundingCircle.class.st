@@ -65,6 +65,11 @@ ConnectableBoundingCircle >> topPoint [
 	^self points at: 1 ifAbsentPut:[ ConnectablePoint new center: self topCenter]
 ]
 
+{ #category : #updating }
+ConnectableBoundingCircle >> updateConnectionsLabel [ 
+	self connections do:[:conn | conn  updateView; updateLabel.]
+]
+
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> updateLayout [ 
 	self bounds: owner bounds.

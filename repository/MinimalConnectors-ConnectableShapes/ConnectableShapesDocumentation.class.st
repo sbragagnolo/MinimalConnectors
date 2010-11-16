@@ -10,7 +10,7 @@ ConnectableShapesDocumentation >> connectableBounds [
 	horizontalConnectableBorder := ClassBox named: 'HorizontalConnectableBorder'.
 	horizontalConnectableBorder instanceMethods: #('updateView' 'initialize' 'updateLayout' ).
 	"Positioning"
-	horizontalConnectableBorder position: 928 @ 250.
+	horizontalConnectableBorder position: 954 @ 221.
 	verticalConnectableBorder := ClassBox named: 'VerticalConnectableBorder'.
 	verticalConnectableBorder instanceMethods: #('updateView' 'initialize' 'updateLayout' ).
 	"Positioning"
@@ -20,14 +20,14 @@ ConnectableShapesDocumentation >> connectableBounds [
 	"Positioning"
 	connectableBorder position: 650 @ 111.
 	singleConnectionPoint := ClassBox named: 'SingleConnectionPoint'.
-	singleConnectionPoint instanceMethods: #('attachTailOf:' 'oppositeConnectionPoint' 'connectTo:' 'attachHeadOf:' 'inConnections' 'initialize' 'connectionsSize' 'borderColor' 'defaultBorderStyle' 'outConnections' 'connections' 'updateConnections' 'dettachFrom:' 'connection' 'connectionIndexOf:' 'hasConnections' ).
+	singleConnectionPoint instanceMethods: #('attachTailOf:' 'oppositeConnectionPoint' 'connectTo:' 'attachHeadOf:' 'updateConnections' 'dettachFrom:' 'connection' ).
 	"Positioning"
-	singleConnectionPoint position: 372 @ 37.
+	singleConnectionPoint position: 377 @ 93.
 	connection := ClassBox named: 'Connection'.
 	connection instanceMethods: #('closestPointTo:' 'connectionPoints:' 'headConnectionPoint' 'tailConnectionPoint' 'from:to:' ).
 	connection classMethods: #('from:to:' ).
 	"Positioning"
-	connection position: 45 @ 107.
+	connection position: 40 @ 94.
 	"Relationships"
 	horizontalConnectableBorder inheritsFrom: connectableBorder.
 	"Relationships"
@@ -54,7 +54,7 @@ ConnectableShapesDocumentation >> connectableShapes [
 	diagramNodeMorph instanceVariables: #('container' 'diagramNode' 'dragEventHandler' ).
 	diagramNodeMorph instanceMethods: #('connectTo:using:' 'update:' 'connections' 'mouseUp:' 'connectTo:' 'relations' 'handlesMouseDown:' 'diagramNode:' 'adjustPosition' 'connectableBounds' 'step' 'initialize' 'updateLayout' 'wantsToBeDroppedInto:' 'mouseDown:' 'justDroppedInto:event:' 'mouseMove:' ).
 	"Positioning"
-	diagramNodeMorph position: 196 @ 45.
+	diagramNodeMorph position: 195 @ 46.
 	connectableBorder := ClassBox named: 'ConnectableBorder'.
 	connectableBorder instanceMethods: #('updateConnectionsLabel' 'connectionPoints' 'sortSubmorphsBy:' 'updateLayout' ).
 	"Positioning"
@@ -71,11 +71,11 @@ ConnectableShapesDocumentation >> connectableShapes [
 	connectableBounds := InterfaceBox named: 'ConnectableBounds'.
 	connectableBounds instanceMethods: #('connections' 'addConnectionPoint:thatConnectsTo:' 'connectionNear:' ).
 	"Positioning"
-	connectableBounds position: 605 @ 82.
+	connectableBounds position: 589 @ 109.
 	tConnectableShape := TraitBox named: 'TConnectableShape'.
 	tConnectableShape instanceMethods: #('connectTo:using:' 'connections' 'connectTo:' 'handlesMouseDown:' 'connectableBounds' ).
 	"Positioning"
-	tConnectableShape position: 11 @ 120.
+	tConnectableShape position: 11 @ 139.
 	"Relationships"
 	diagramNodeMorph hasA: connectableBounds labeledAs: 'connectableBounds'.
 	diagramNodeMorph usesTrait: tConnectableShape.
@@ -102,23 +102,23 @@ ConnectableShapesDocumentation >> inheritanceforConnection [
 	connection instanceMethods: #('fullLineWidth' 'curveSegmentAt:' 'closestPointTo:' 'arrowScales:' 'arrows:' 'drawSegmentedCurveOnAACanvas:canvas:isShadow:' 'curveInfoNearest:' 'outerBounds' 'drawDashedBorderOn:usingEnds:' 'initialize' 'lineWidth' 'intersectionsWith:' 'defaultBackgroundColor' 'lineSegmentsDo:' 'removeShortEndSegmentsStepping:' 'lastVertex' 'drawOn:' 'to:' 'heading:' 'privateMoveBy:' 'areasRemainingToFill:' 'arrowNames:' 'closestSegmentTo:' 'segments' 'oldBorderWidth:' 'lineSegments' 'rotationCenter' 'makeNoArrows' 'lineWidth:' 'curveVertexAt:put:' 'makeForwardArrow' 'beStraightSegments' 'arrowsContainPoint:' 'close' 'insertVertexAfterEndAt:' 'defaultBitmapFillForm' 'rotationCenter:' 'nextDuplicateVertexIndex' 'lineColor' 'scale' 'reduceVertices' 'hasMouseFocus' 'vertices' 'bezierSegmentsDo:' 'arrowJoints' 'segmentsDo:' 'doesBevels' 'curveBounds' 'arrowScales' 'updateHeadVertex' 'vertices:' 'arrows' 'headConnectionPoint' 'transformedBy:' 'iconsSpecsOnClick' 'bezierPoints' 'innerBounds' 'updateArrowContours' 'arrowVertices' 'connectionPoints:' 'outsideBezierPoints' 'setVertices:' 'interiorCurveSegmentAt:put:' 'lineColor:' 'rotationDegrees:' 'connectionFactory' 'isCurve' 'insertVertexBeforeStartAt:' 'connectionFactory:' 'beSmoothCurve:' 'arrowForms' 'firstVertex' 'makeBothArrows' 'toggleSmoothing' 'tailConnectionPointCenter' 'computeContours' 'curveSegmentAt:put:' 'hasArrows' 'headConnectionPointCenter' 'nextToFirstPoint' 'canDrawBorder:' 'makeBackArrow' 'vertexAt:' 'tailConnectionPoint' 'fullBounds' 'computeBounds' 'vertexPairsDo:' 'contours' 'computeSegments' 'midpoint' 'from:to:' 'straighten' 'totalLength' 'interiorCurveVertexAt:put:' 'verticesAt:put:' 'unrotatedWidth' 'nextToLastPoint' 'defaultArrow' 'lostMouseFocus' 'dashedBorder:' 'arrowContours' 'containsPoint:' 'outsidePoints' 'canHaveFillStyles' 'extent:' 'curveHandleClass' 'contourPoints' 'dashedLine:' 'updateTailVertex' 'updateView' 'beSmoothCurve' 'couldHaveRoundedCorners' 'drawSmoothCurveOnAACanvas:canvas:isShadow:' 'curveVertexAt:' 'referencePosition' 'scale:' 'removeVertex:' 'vertices:color:borderStyle:' 'rotationDegrees' 'vertices:lineWidth:lineColor:borderStyle:' ).
 	connection classMethods: #('newAssociation' 'nameForArrowGlyph:' 'clearArrowDictionary' 'newNoteConnector' 'from:to:' 'newWithArrow' 'initializeArrowDictionary' 'newStateTransition' 'initialize' 'basicArrow' 'noArrow' 'defaultArrow' 'newDirectionalAssociation' 'newImplementationRelationship' 'umlArrow' 'newHierarchyAssociation' 'openArrow' 'arrowDictionary' 'newGeneralizationRelationship' 'newCurvyConnector' 'newCurvyArrow' 'vertices:color:borderStyle:' 'showSamples' 'newInheritanceAssociation' 'vertices:lineWidth:lineColor:borderStyle:' ).
 	"Positioning"
-	connection position: 10 @ 10.
+	connection position: 115 @ 13.
 	handledConnection := ClassBox named: 'HandledConnection'.
 	handledConnection instanceVariables: #('handles' ).
 	handledConnection instanceMethods: #('handleForEvent:' 'click:' 'addHandles' 'endPointHandles' 'endPointHandles:' 'interiorHandleForEvent:' 'initializeInteraction' 'removeHandles' 'initialize' 'handleForPosition:addAllowed:' 'dragHandleStarted:' 'interiorHandleForPosition:addAllowed:' 'handles' 'dragHandleStoped:' ).
 	"Positioning"
-	handledConnection position: 10 @ 712.
+	handledConnection position: 574 @ 393.
 	uMLConnection := ClassBox named: 'UMLConnection'.
 	uMLConnection instanceVariables: #('label' 'cardinality' ).
 	uMLConnection instanceMethods: #('clipSubmorphs' 'fitIntoDiagram:' 'goesRight' 'dettachFromConnectionPoints' 'connectionPoints' 'isConnected' 'updateLabel' 'step' 'labelText:' 'stepTime' 'goesLeft' 'target:' ).
 	uMLConnection classMethods: #('newTraitsUse' 'fromRelation:forDiagram:' 'newInstanceUse' 'newImplementationAssociation' 'newInstanceAssociation' 'newInheritanceAssociation' ).
 	"Positioning"
-	uMLConnection position: 235 @ 712.
+	uMLConnection position: 590 @ 16.
 	referenceConnection := ClassBox named: 'ReferenceConnection'.
 	referenceConnection instanceMethods: #('updateLabel' 'connectionPoints:' 'initialize' ).
 	referenceConnection classMethods: #('newReference' ).
 	"Positioning"
-	referenceConnection position: 10 @ 1110.
+	referenceConnection position: 968 @ 139.
 	"Relationships"
 	handledConnection inheritsFrom: connection.
 	"Relationships"
@@ -133,13 +133,61 @@ ConnectableShapesDocumentation >> inheritanceforConnection [
 ]
 
 { #category : #diagrams }
+ConnectableShapesDocumentation >> inheritanceforDiagramNode [
+	| d diagramNode objectNode interfaceBox traitBox classBox |
+	diagramNode := ClassBox named: 'DiagramNode'.
+	diagramNode instanceVariables: #('position' 'relations' 'name' ).
+	diagramNode instanceMethods: #('variableNameForDescriptionCode' 'position:' 'writeRelationshipsDescriptionOn:' 'addRelationship:' 'creationCode' 'name:' 'printString' 'position' 'relationshipsCode' 'removeRelationshipsWith:' 'descriptionCodeForEdition' 'name' 'writeDefinitionDescriptionOn:' ).
+	diagramNode classMethods: #('named:' ).
+	"Positioning"
+	diagramNode position: 10 @ 10.
+	objectNode := ClassBox named: 'ObjectNode'.
+	objectNode instanceVariables: #('object' ).
+	objectNode instanceMethods: #('object:' 'updaterClass' 'object' 'hash' 'subject' 'variableNames' 'hasA:labeledAs:' '=' 'label' 'resetConnections' 'view' 'variableNamed:' 'descriptionCodeForEdition' 'connectToReferencesWithin:' 'realDiagramNode' ).
+	objectNode classMethods: #('for:' ).
+	"Positioning"
+	objectNode position: 22 @ 353.
+	interfaceBox := ClassBox named: 'InterfaceBox'.
+	interfaceBox instanceVariables: #('classMethods' 'instanceMethods' ).
+	interfaceBox instanceMethods: #('updaterClass' 'openDescriptionCode' 'instanceMethods:' 'instanceMethods' 'methods' 'boxTitle' 'classMethods' 'height' 'usesTrait:' 'descriptionCode' 'boxTitle:' 'isATypeOf:' 'classMethods:' 'view' 'inheritsFrom:' 'realDiagramNode' 'writeDescription:withValue:on:' 'writeDefinitionDescriptionOn:' ).
+	interfaceBox classMethods: #('selectorsAsStrings:' 'newNamed:' ).
+	"Positioning"
+	interfaceBox position: 359 @ 17.
+	traitBox := ClassBox named: 'TraitBox'.
+	traitBox instanceMethods: #('view' ).
+	traitBox classMethods: #('fromTrait:' ).
+	"Positioning"
+	traitBox position: 935 @ 33.
+	classBox := ClassBox named: 'ClassBox'.
+	classBox instanceVariables: #('instanceVariables' 'classInstanceVariables' 'classVariables' 'targetClass' ).
+	classBox instanceMethods: #('instanceMethods' 'classVariables' 'implements:' 'height' 'subject' 'classInstanceVariables' 'instanceVariables:' 'classMethods:' 'variables' 'instanceVariables' 'updaterClass' 'instanceMethods:' 'classMethods' 'classInstanceVariables:' 'hasA:labeledAs:' 'targetClass:' 'usesLotsOf:labeledAs:' 'descriptionCode' 'usesA:labeledAs:' 'view' 'isATypeOf:' 'descriptionCodeForEdition' 'inheritsFrom:' 'hasLotsOf:labeledAs:' 'classVariables:' 'writeDefinitionDescriptionOn:' ).
+	classBox classMethods: #('fromClass:' ).
+	"Positioning"
+	classBox position: 906 @ 186.
+	"Relationships"
+	objectNode inheritsFrom: diagramNode.
+	"Relationships"
+	interfaceBox inheritsFrom: diagramNode.
+	"Relationships"
+	traitBox inheritsFrom: interfaceBox.
+	"Relationships"
+	classBox inheritsFrom: interfaceBox.
+	d := (ClassDiagram new name: 'Inheritance for DiagramNode') addDiagramNode: diagramNode;
+				 addDiagramNode: objectNode;
+				 addDiagramNode: interfaceBox;
+				 addDiagramNode: traitBox;
+				 addDiagramNode: classBox.
+	^ d
+]
+
+{ #category : #diagrams }
 ConnectableShapesDocumentation >> inheritanceforDiagramNodeMorph [
 	| d diagramNodeMorph interfaceBoxMorph classBoxMorph traitBoxMorph objectNodeMorph |
 	diagramNodeMorph := ClassBox named: 'DiagramNodeMorph'.
 	diagramNodeMorph instanceVariables: #('container' 'diagramNode' 'dragEventHandler' ).
 	diagramNodeMorph instanceMethods: #('connectTo:using:' 'update:' 'connections' 'mouseUp:' 'connectTo:' 'relations' 'handlesMouseDown:' 'diagramNode:' 'adjustPosition' 'connectableBounds' 'step' 'initialize' 'updateLayout' 'wantsToBeDroppedInto:' 'mouseDown:' 'justDroppedInto:event:' 'mouseMove:' ).
 	"Positioning"
-	diagramNodeMorph position: 10 @ 10.
+	diagramNodeMorph position: 116 @ 23.
 	interfaceBoxMorph := ClassBox named: 'InterfaceBoxMorph'.
 	interfaceBoxMorph instanceVariables: #('methodsBox' 'boundingBox' 'titleBox' ).
 	interfaceBoxMorph instanceMethods: #('newText' 'newRectangle' 'update:' 'formattedText:' 'textMorphFor:withEmphasis:' 'addTextMorphFor:into:withEmphasis:' 'textMorphClass' 'diagramNode:' 'updateBounds' 'connectableBounds' 'initialize' 'addTextMorphFor:into:' 'initializeBoundingBox' 'updateRelationships' 'defaultBorderStyle' 'updateTitle' 'descriptionCode' 'connectionBorderNear:' 'updateMethods' 'textMorphFor:' 'fontSize' 'addBoxesToContainer' 'insideBorderStyle' 'listFrom:' ).
