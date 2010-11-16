@@ -24,7 +24,7 @@ DiagramWhiteboard >> connections [
 
 { #category : #'as yet unclassified' }
 DiagramWhiteboard >> diagram [
-	^self model model
+	^self model
 ]
 
 { #category : #accessing }
@@ -64,10 +64,8 @@ DiagramWhiteboard >> model [
 DiagramWhiteboard >> model: anObject [
 	model := anObject.
 	model ifNotNil: [
-		self diagram removeDependent: self.
-		model removeDependent: self].
+		self diagram removeDependent: self.].
 	anObject ifNotNil: [
-		.anObject addDependent: self.
 		self diagram addDependent: self. ].
 	diagramNodes := Dictionary new.
 
@@ -123,6 +121,7 @@ DiagramWhiteboard >> update [
 	self connections do: #updateView.
 	self connections do: #updateLabel.
 	self diagramNodeMorphs do: [:classBoxMorph | classBoxMorph updateBounds  ].
+	self bounds: self fullBounds.
 	"owner ifNil:[self bounds: self fullBounds] ifNotNil:[self bounds: owner bounds].
 "
 	

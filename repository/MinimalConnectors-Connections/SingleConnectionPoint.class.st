@@ -136,6 +136,11 @@ SingleConnectionPoint >> updateConnections [
 	 
 ]
 
+{ #category : #updating }
+SingleConnectionPoint >> updateConnectionsLabel [
+	self connections do:[:conn | conn  updateLabel.]
+]
+
 { #category : #'as yet unclassified' }
 SingleConnectionPoint >> updateFillStyle [ 
 	self fillStyle: Color transparent 
