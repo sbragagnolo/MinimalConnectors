@@ -20,7 +20,7 @@ SingleConnectionPoint >> attachTailOf: aConnector [
 
 { #category : #accessing }
 SingleConnectionPoint >> borderColor [
-	^Color transparent
+	^Color transparent 
 ]
 
 { #category : #accessing }
@@ -80,7 +80,7 @@ SingleConnectionPoint >> dettachFrom: aConnector [
 	inConnections remove: aConnector ifAbsent:[ ].
 	outConnections remove: aConnector ifAbsent:[].
 	formerOwner := owner.
-	owner removeMorph: self.
+	"owner removeMorph: self."
 	"formerOwner owner updateLayout."
 ]
 
@@ -91,7 +91,7 @@ SingleConnectionPoint >> factory [
 
 { #category : #'visual properties' }
 SingleConnectionPoint >> fillStyle [
-	^Color transparent 
+	^Color transparent  
 ]
 
 { #category : #testing }
@@ -132,7 +132,7 @@ SingleConnectionPoint >> outConnections [
 SingleConnectionPoint >> updateConnections [ 
 	"inConnections do:[:each| each updateHeadVertex ].
 	outConnections do:[:each| each updateTailVertex ]."
-	self connections do:#updateView
+	self connections do:[:conn | conn  updateView; updateLabel]
 	 
 ]
 

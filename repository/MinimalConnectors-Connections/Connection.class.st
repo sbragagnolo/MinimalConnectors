@@ -815,6 +815,7 @@ Connection >> firstVertex [
 
 { #category : #connecting }
 Connection >> from: origin to: destination [ 
+
 	self vertices: {origin position . destination position}.
 	origin attachTailOf: self .
 	destination attachHeadOf: self. 
@@ -1451,8 +1452,8 @@ Connection >> updateTailVertex [
 Connection >> updateView [ 
 	self
 		updateTailVertex ;
-		updateHeadVertex ;
-		changed.
+		updateHeadVertex;
+		changed
 ]
 
 { #category : #accessing }

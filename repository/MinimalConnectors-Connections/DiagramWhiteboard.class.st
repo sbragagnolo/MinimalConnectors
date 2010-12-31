@@ -8,6 +8,16 @@ Class {
 	#category : #'MinimalConnectors-Connections'
 }
 
+{ #category : #accessing }
+DiagramWhiteboard >> allConnectedMorphs [
+	^self diagramNodeMorphs
+]
+
+{ #category : #accessing }
+DiagramWhiteboard >> allConnections [
+	^self connections
+]
+
 { #category : #positioning }
 DiagramWhiteboard >> availablePositions [
 	^ (self positionedDiagramNodes 
@@ -29,7 +39,7 @@ DiagramWhiteboard >> diagram [
 
 { #category : #accessing }
 DiagramWhiteboard >> diagramNodeMorphFor: aDiagramNodeDescription [
-	^diagramNodes at: aDiagramNodeDescription ifAbsentPut: aDiagramNodeDescription view
+	^diagramNodes at: aDiagramNodeDescription ifAbsentPut: [aDiagramNodeDescription view]
 ]
 
 { #category : #accessing }
@@ -52,7 +62,8 @@ DiagramWhiteboard >> initialize [
 	super initialize.
 	self fillStyle: Color white.
 	self dropEnabled: true.
-	self extent: 500@500
+	self extent: 500@500.
+	self clipSubmorphs: false.
 ]
 
 { #category : #'as yet unclassified' }
@@ -113,15 +124,17 @@ DiagramWhiteboard >> update [
 	self positionDiagramNodes.
 	self diagramNodeMorphs" do: [:classBoxMorph | classBoxMorph updateRelationships  ]".
 	diagramNodes keysAndValuesDo: [:classBoxDescription :classBoxMorph | 
-		(classBoxDescription relations difference: (classBoxMorph connections)) do:[:relation | 
+		(classBoxDescription relations" difference: classBoxMorph connections") do:[:relation | 
 			relation view fitIntoDiagram:self ]].
 
 	self addAllMorphs: (self diagramNodeMorphs difference: submorphs ). 
 	self diagramNodeMorphs do: #adjustPosition.
-	self connections do: #updateView.
-	self connections do: #updateLabel.
+	
 	self diagramNodeMorphs do: [:classBoxMorph | classBoxMorph updateBounds  ].
 	self bounds: self fullBounds.
+	self position: 0@0.
+	self connections do: #updateView.
+	self connections do: #updateLabel.
 	"owner ifNil:[self bounds: self fullBounds] ifNotNil:[self bounds: owner bounds].
 "
 	
@@ -141,7 +154,8 @@ DiagramWhiteboard >> updateDescriptionCode [
 
 { #category : #'as yet unclassified' }
 DiagramWhiteboard >> updateRelationships [
-	self connections do:[:rel | rel fitIntoDiagram: self].
-	self connections do: #updateView.
-	self diagramNodeMorphs do: #updateBounds.
+		
+		self diagramNodeMorphs do: #resetBoundings.
+		self connections do:[:rel | rel fitIntoDiagram: self].
+		self diagramNodeMorphs do: #updateBounds.
 ]
