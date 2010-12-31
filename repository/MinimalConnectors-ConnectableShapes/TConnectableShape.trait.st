@@ -16,9 +16,14 @@ TConnectableShape >> connectTo: anotherBox using: aConnection [
 	destination := SingleConnectionPoint new.
 	self connectableBounds addConnectionPoint: origin thatConnectsTo: anotherBox.
 	anotherBox connectableBounds addConnectionPoint: destination thatConnectsTo:  self.
-	aConnection from: origin to: destination.
-	self connectableBounds addMorph: aConnection.
+	self connectableBounds changed.
+	anotherBox connectableBounds changed.
 
+	self connectableBounds addMorph: aConnection  .
+	anotherBox connectableBounds addMorph: aConnection.
+	aConnection from: origin to: destination.
+	self connectableBounds  updateView  .
+	anotherBox connectableBounds  updateView.
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,4 +40,33 @@ TConnectableShape >> connections [
 { #category : #'as yet unclassified' }
 TConnectableShape >> handlesMouseDown: evt [
 	^true
+]
+
+{ #category : #'as yet unclassified' }
+TConnectableShape >> justDroppedInto: aMorph event: anEvent [
+	self diagramNode position: self position.
+	self owner updateRelationships.
+
+]
+
+{ #category : #'as yet unclassified' }
+TConnectableShape >> mouseDown: evt [
+	self dragEventHandler startHandleDrag: evt
+]
+
+{ #category : #'as yet unclassified' }
+TConnectableShape >> mouseMove: evt [
+	self dragEventHandler handleMove: evt.
+	self justDroppedInto: self owner event: evt. 
+	self connectableBounds updateConnections.
+]
+
+{ #category : #'as yet unclassified' }
+TConnectableShape >> mouseUp: evt [
+	self dragEventHandler stopHandleDrag: evt.
+]
+
+{ #category : #'as yet unclassified' }
+TConnectableShape >> wantsToBeDroppedInto: aMorph [
+	^aMorph isKindOf: DiagramWhiteboard 
 ]

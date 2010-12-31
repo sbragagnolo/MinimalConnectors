@@ -16,7 +16,7 @@ DraggingEventHandler >> handleMove: evt [
 	lastPoint := desiredPoint.
 	desiredPoint := evt position + offset.
 	lastPoint = desiredPoint ifTrue: [ ^self ].
-	passenger position: desiredPoint 
+	passenger position: desiredPoint .
 ]
 
 { #category : #accessing }
@@ -44,6 +44,6 @@ DraggingEventHandler >> startHandleDrag: evt [
 DraggingEventHandler >> stopHandleDrag: evt [
 	dragStartPoint := desiredPoint := nil.
 	evt hand releaseMouseFocus: self passenger.
-	self passenger justDroppedInto: self passenger owner event: evt
+	"self passenger justDroppedInto: self passenger owner event: evt"
 	"self triggerEvent: #dragStop."
 ]

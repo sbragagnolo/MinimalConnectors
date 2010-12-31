@@ -27,7 +27,10 @@ HorizontalConnectableBorder >> updateLayout [
 
 { #category : #'as yet unclassified' }
 HorizontalConnectableBorder >> updateView [ 
-	self comeToFront.
-	self cellInset: (self width / (self submorphs size + 1)).
-	self sortSubmorphsBy: [:s1 :s2 | s1 oppositeConnectionPoint left > s2 oppositeConnectionPoint left ]
+"self haltIf:[submorphs size >= 2]."
+		
+	
+		self sortSubmorphsBy: [:s1 :s2 | s1 oppositeConnectionPoint left > s2 oppositeConnectionPoint left ].
+
+		self updateConnections.
 ]

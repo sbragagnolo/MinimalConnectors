@@ -2,7 +2,8 @@ Class {
 	#name : #ConnectableBoundingCircle,
 	#superclass : #Morph,
 	#instVars : [
-		'points'
+		'points',
+		'center'
 	],
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
@@ -19,17 +20,18 @@ ConnectableBoundingCircle >> bottomPoint [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> connectionNear: anotherClassBox [
-	self top > anotherClassBox bottom ifTrue:[^self  topPoint].
-	self bottom < anotherClassBox top ifTrue:[^self  bottomPoint].
-	self left > anotherClassBox right ifTrue:[^self  leftPoint].
-	self right < anotherClassBox left ifTrue:[^self  rightPoint].
-	^self  leftPoint
+ConnectableBoundingCircle >> centerPoint [
+	^center ifNil:[center:= ConnectablePoint new center: self center]
+]
+
+{ #category : #'as yet unclassified' }
+ConnectableBoundingCircle >> connectionNear: anotherConnectableShape [
+	^self points add: (ConnectablePoint new center: (owner closestPointTo: anotherConnectableShape center))
 ]
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> connections [
-	^self submorphs select:[:sub | sub isKindOf: Connection ]
+	^(self submorphs select:[:sub | sub isKindOf: Connection ]) union:(self points inject: Set new into:[:conns :point | conns union: point connections])
 ]
 
 { #category : #'as yet unclassified' }
@@ -39,10 +41,10 @@ ConnectableBoundingCircle >> initialize [
 	self borderColor: Color black.
 	
 	points := OrderedCollection new.
-	self addMorph: self leftPoint.
+	"self addMorph: self leftPoint.
 	self addMorph: self rightPoint.
 	self addMorph: self topPoint.
-	self addMorph: self bottomPoint 
+	self addMorph: self bottomPoint "
 ]
 
 { #category : #'as yet unclassified' }
@@ -53,6 +55,11 @@ ConnectableBoundingCircle >> leftPoint [
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> points [
 	^points
+]
+
+{ #category : #updating }
+ConnectableBoundingCircle >> resetConnectionPoints [
+	self points do:[:point | point removeAllMorphs ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -66,7 +73,7 @@ ConnectableBoundingCircle >> topPoint [
 ]
 
 { #category : #updating }
-ConnectableBoundingCircle >> updateConnectionsLabel [ 
+ConnectableBoundingCircle >> updateConnections [
 	self connections do:[:conn | conn  updateView; updateLabel.]
 ]
 
@@ -74,8 +81,18 @@ ConnectableBoundingCircle >> updateConnectionsLabel [
 ConnectableBoundingCircle >> updateLayout [ 
 	self bounds: owner bounds.
 	self center: owner center.
-	self leftPoint center: self leftCenter.
+	"self leftPoint center: self leftCenter.
 	self topPoint center: self topCenter.
 	self bottomPoint center: self bottomCenter.
-	self rightPoint center: self rightCenter .
+	self rightPoint center: self rightCenter ."
+	self centerPoint center: self center.
+	
+	(self centerPoint points allSatisfy: [:point | point outConnections isEmpty ]) 
+		ifTrue:[owner comeToFront ]
+	
+]
+
+{ #category : #updating }
+ConnectableBoundingCircle >> updateView [
+	
 ]

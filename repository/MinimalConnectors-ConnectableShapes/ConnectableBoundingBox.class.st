@@ -13,7 +13,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
-	(self connectionNear: aShape ) addMorph: aConnectionPoint .
+	(self connectionNear: aShape ) addConnectionPoint: aConnectionPoint .
 	 
 ]
 
@@ -26,12 +26,6 @@ ConnectableBoundingBox >> borders [
 { #category : #borders }
 ConnectableBoundingBox >> bottomBorder [
 	^self borders at: 3 ifAbsentPut:[ self newHorizontalBorder].
-]
-
-{ #category : #'as yet unclassified' }
-ConnectableBoundingBox >> bounds: bounds2 [
-	
-	super bounds: bounds2 
 ]
 
 { #category : #'as yet unclassified' }
@@ -82,17 +76,6 @@ ConnectableBoundingBox >> leftBorder [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBox >> newBorder [
-	^HorizontalConnectableBorder new 
-		color: Color transparent ; 
-		borderColor: Color transparent ;
-		width: 1;
-		layoutPolicy: TableLayout new;
-		wrapCentering: #center;
-		layoutInset: 0.
-]
-
-{ #category : #'as yet unclassified' }
 ConnectableBoundingBox >> newHorizontalBorder [
 	^ (HorizontalConnectableBorder new)
 ]
@@ -109,6 +92,11 @@ ConnectableBoundingBox >> noteNewOwner: aMorph [
 		
 ]
 
+{ #category : #updating }
+ConnectableBoundingBox >> resetConnectionPoints [
+	self borders do: #removeAllMorphs 
+]
+
 { #category : #borders }
 ConnectableBoundingBox >> rightBorder [
 	^self borders at: 2 ifAbsentPut:[self newVerticalBorder].
@@ -120,8 +108,8 @@ ConnectableBoundingBox >> topBorder [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBox >> updateConnectionsLabel [ 
-	self borders do:[:border | border updateConnectionsLabel ]
+ConnectableBoundingBox >> updateConnections [
+	self borders do:[:border | border updateConnections]
 ]
 
 { #category : #'as yet unclassified' }

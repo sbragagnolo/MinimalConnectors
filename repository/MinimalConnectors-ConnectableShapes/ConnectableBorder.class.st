@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+ConnectableBorder >> addConnectionPoint: aMorph [
+	self addMorph: aMorph.
+	self cellInset: (owner width / (self submorphs size +1)).
+]
+
+{ #category : #'as yet unclassified' }
 ConnectableBorder >> connectionPoints [
 	^self submorphs
 ]
@@ -20,9 +26,9 @@ ConnectableBorder >> sortSubmorphsBy: aBlock [
 	(subs sortBy: aBlock) do:[:s | self addMorph: s]
 ]
 
-{ #category : #'as yet unclassified' }
-ConnectableBorder >> updateConnectionsLabel [ 
-	self connectionPoints do:[:point | point updateConnectionsLabel ]
+{ #category : #updating }
+ConnectableBorder >> updateConnections [
+	self connectionPoints do:[:point | point updateConnections .]
 ]
 
 { #category : #'as yet unclassified' }
