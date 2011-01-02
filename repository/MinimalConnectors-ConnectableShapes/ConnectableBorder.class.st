@@ -23,7 +23,7 @@ ConnectableBorder >> sortSubmorphsBy: aBlock [
 	subs := submorphs.
 	self removeAllMorphs.
 	
-	(subs sortBy: aBlock) do:[:s | self addMorph: s]
+	(subs sort: aBlock) do:[:s | self addMorph: s]
 ]
 
 { #category : #updating }
