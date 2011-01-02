@@ -19,6 +19,11 @@ DraggingEventHandler >> handleMove: evt [
 	passenger position: desiredPoint .
 ]
 
+{ #category : #'as yet unclassified' }
+DraggingEventHandler >> mouseDown: evt [
+	self startHandleDrag: evt.
+]
+
 { #category : #accessing }
 DraggingEventHandler >> passenger [
 	^ passenger

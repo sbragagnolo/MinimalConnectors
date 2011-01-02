@@ -51,19 +51,18 @@ TConnectableShape >> justDroppedInto: aMorph event: anEvent [
 
 { #category : #'as yet unclassified' }
 TConnectableShape >> mouseDown: evt [
-	self dragEventHandler startHandleDrag: evt
+	self eventHandler mouseDown: evt
 ]
 
 { #category : #'as yet unclassified' }
 TConnectableShape >> mouseMove: evt [
-	self dragEventHandler handleMove: evt.
-	self justDroppedInto: self owner event: evt. 
-	self connectableBounds updateConnections.
+	self eventHandler handleMove: evt.
+	
 ]
 
 { #category : #'as yet unclassified' }
 TConnectableShape >> mouseUp: evt [
-	self dragEventHandler stopHandleDrag: evt.
+	self eventHandler stopHandleDrag: evt.
 ]
 
 { #category : #'as yet unclassified' }
