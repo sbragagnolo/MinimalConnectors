@@ -180,3 +180,16 @@ ConfigurationOfMinimalConnectors >> version05: spec [
 				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
 				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.8']
 ]
+
+{ #category : #versions }
+ConfigurationOfMinimalConnectors >> version06: spec [
+	<version: '0.6' imports: #('0.1-baseline')>
+	spec
+		for: #common
+		do: [ 
+			spec
+				blessing: #release;
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.15';
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.8']
+]
