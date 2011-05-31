@@ -44,7 +44,7 @@ ConnectableBoundingBox >> connectionPoints [
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingBox >> connections [
-	^self submorphs select:[:sub | sub isKindOf: Connection ]
+	^self submorphs select:[:sub | sub isKindOf: ConnectionMorph ]
 ]
 
 { #category : #accessing }

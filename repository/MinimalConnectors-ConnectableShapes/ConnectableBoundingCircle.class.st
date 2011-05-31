@@ -31,7 +31,7 @@ ConnectableBoundingCircle >> connectionNear: anotherConnectableShape [
 
 { #category : #'as yet unclassified' }
 ConnectableBoundingCircle >> connections [
-	^(self submorphs select:[:sub | sub isKindOf: Connection ]) union:(self points inject: Set new into:[:conns :point | conns union: point connections])
+	^(self submorphs select:[:sub | sub isKindOf: ConnectionMorph ]) union:(self points inject: Set new into:[:conns :point | conns union: point connections])
 ]
 
 { #category : #'as yet unclassified' }

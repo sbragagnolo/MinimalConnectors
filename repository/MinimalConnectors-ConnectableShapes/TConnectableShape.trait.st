@@ -5,7 +5,7 @@ Trait {
 
 { #category : #'as yet unclassified' }
 TConnectableShape >> connectTo: anotherBox [ 
-	self connectTo: anotherBox using: Connection new
+	self connectTo: anotherBox using: ConnectionMorph new
 
 ]
 
