@@ -1,5 +1,5 @@
 Class {
-	#name : #Connection,
+	#name : #ConnectionMorph,
 	#superclass : #ShapeMorph,
 	#instVars : [
 		'lineWidth',
@@ -23,19 +23,19 @@ Class {
 }
 
 { #category : #arrows }
-Connection class >> arrowDictionary [
+ConnectionMorph class >> arrowDictionary [
 	^ArrowGlyphs ifNil: [
 		ArrowGlyphs := Dictionary new.
 		self initializeArrowDictionary ].
 ]
 
 { #category : #'arrow forms' }
-Connection class >> basicArrow [
+ConnectionMorph class >> basicArrow [
 	^ NCLineArrowGlyph  basicArrow1  
 ]
 
 { #category : #arrows }
-Connection class >> clearArrowDictionary [
+ConnectionMorph class >> clearArrowDictionary [
 	ArrowGlyphs ifNil: [ ^ArrowGlyphs := Dictionary new ].
 	ArrowGlyphs keysAndValuesRemove: [ :k :v | true ];
 		changed: #arrowsChanged.
@@ -43,23 +43,23 @@ Connection class >> clearArrowDictionary [
 ]
 
 { #category : #'arrow forms' }
-Connection class >> defaultArrow [
+ConnectionMorph class >> defaultArrow [
 	^NCLineArrowGlyph noArrow
 ]
 
 { #category : #'instance creation' }
-Connection class >> from: startConnectionPoint to: stopConnectionPoint [ 
+ConnectionMorph class >> from: startConnectionPoint to: stopConnectionPoint [ 
 	^self new from: startConnectionPoint to: stopConnectionPoint
 
 ]
 
 { #category : #'class initialization' }
-Connection class >> initialize [
+ConnectionMorph class >> initialize [
 	self initializeArrowDictionary.
 ]
 
 { #category : #arrows }
-Connection class >> initializeArrowDictionary [
+ConnectionMorph class >> initializeArrowDictionary [
 	
 	ArrowGlyphs ifNil: [ ArrowGlyphs := Dictionary new ].
 
@@ -76,7 +76,7 @@ Connection class >> initializeArrowDictionary [
 ]
 
 { #category : #arrows }
-Connection class >> nameForArrowGlyph: anArrow [
+ConnectionMorph class >> nameForArrowGlyph: anArrow [
 	self arrowDictionary keysAndValuesDo: [ :key :value |
 		anArrow originalFirstContour = value originalFirstContour
 			ifTrue: [ ^key ].
@@ -85,13 +85,13 @@ Connection class >> nameForArrowGlyph: anArrow [
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newAssociation [
+ConnectionMorph class >> newAssociation [
 	^self new
 		name: 'Association'
 ]
 
 { #category : #'instance creation' }
-Connection class >> newCurvyArrow [
+ConnectionMorph class >> newCurvyArrow [
 	^ self new
 		beSmoothCurve;
 		name: 'Curvy ConnectorArrow';
@@ -99,7 +99,7 @@ Connection class >> newCurvyArrow [
 ]
 
 { #category : #'instance creation' }
-Connection class >> newCurvyConnector [
+ConnectionMorph class >> newCurvyConnector [
 	^ self new
 		beSmoothCurve;
 		name: 'Curvy Connector';
@@ -107,14 +107,14 @@ Connection class >> newCurvyConnector [
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newDirectionalAssociation [
+ConnectionMorph class >> newDirectionalAssociation [
 	^(self new)
 		name: 'Association';
 		arrowNames: #(noArrow umlArrow)
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newGeneralizationRelationship [
+ConnectionMorph class >> newGeneralizationRelationship [
 
 	^(self new) 
 		arrowNames: #(noArrow openArrow);
@@ -122,28 +122,28 @@ Connection class >> newGeneralizationRelationship [
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newHierarchyAssociation [
+ConnectionMorph class >> newHierarchyAssociation [
 	^(self new)
 		name: 'Association';
 		arrowNames: #(noArrow umlArrow)
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newImplementationRelationship [
+ConnectionMorph class >> newImplementationRelationship [
 	^self newGeneralizationRelationship
 		dashedLine: true;
 		name: 'Implements'
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newInheritanceAssociation [
+ConnectionMorph class >> newInheritanceAssociation [
 	^(self new)
 		name: 'Inheritance';
 		arrowNames: #(noArrow umlArrow)
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newNoteConnector [
+ConnectionMorph class >> newNoteConnector [
 	^self new
 		dashedLine: true;
 		lineWidth: 1;
@@ -152,31 +152,31 @@ Connection class >> newNoteConnector [
 ]
 
 { #category : #'instance creation-UML' }
-Connection class >> newStateTransition [
+ConnectionMorph class >> newStateTransition [
 	^self new
 		arrowNames: #(noArrow basicArrow);
 		name: 'Transition'
 ]
 
 { #category : #'instance creation' }
-Connection class >> newWithArrow [
+ConnectionMorph class >> newWithArrow [
 	^ self new
 		name: 'Arrow';
 		arrowNames: #(#noArrow #basicArrow )
 ]
 
 { #category : #'arrow forms' }
-Connection class >> noArrow [
+ConnectionMorph class >> noArrow [
 	^NCLineArrowGlyph noArrow
 ]
 
 { #category : #'arrow forms' }
-Connection class >> openArrow [
+ConnectionMorph class >> openArrow [
 	^ NCLineArrowGlyph openArrow.
 ]
 
 { #category : #testing }
-Connection class >> showSamples [
+ConnectionMorph class >> showSamples [
 	"
 	self showSamples
 	"
@@ -202,32 +202,32 @@ Connection class >> showSamples [
 ]
 
 { #category : #'arrow forms' }
-Connection class >> umlArrow [
+ConnectionMorph class >> umlArrow [
 	^ NCLineArrowGlyph umlArrow 
 ]
 
 { #category : #'instance creation' }
-Connection class >> vertices: verts color: c borderStyle: aBorderStyle [ 
+ConnectionMorph class >> vertices: verts color: c borderStyle: aBorderStyle [ 
 	^ self new vertices: verts color: c borderStyle: aBorderStyle 
 ]
 
 { #category : #'instance creation' }
-Connection class >> vertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle [ 
+ConnectionMorph class >> vertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle [ 
 	^ self new vertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle 
 ]
 
 { #category : #drawing }
-Connection >> areasRemainingToFill: aRectangle [
+ConnectionMorph >> areasRemainingToFill: aRectangle [
 	^ { aRectangle }
 ]
 
 { #category : #arrows }
-Connection >> arrowContours [
+ConnectionMorph >> arrowContours [
 	^{ contours fourth. contours second }
 ]
 
 { #category : #arrows }
-Connection >> arrowForms [
+ConnectionMorph >> arrowForms [
 	arrowForms ifNotNil: [ ^arrowForms ].
 	arrowForms := self arrowContours withIndexCollect: [ :ac :aci | | form rect ext offset ji |
 		rect := (Rectangle encompassing: ac) rounded.
@@ -251,24 +251,24 @@ Connection >> arrowForms [
 ]
 
 { #category : #arrows }
-Connection >> arrowJoints [
+ConnectionMorph >> arrowJoints [
 	^arrowJoints ifNil: [ arrowJoints := { vertices first. vertices last } ].
 ]
 
 { #category : #arrows }
-Connection >> arrowNames: anArray [
+ConnectionMorph >> arrowNames: anArray [
 	"anArray has the keys into my arrow dictionary for the desired arrows"
 	self arrows: (anArray collect: [ :ea | self class arrowDictionary at: ea ifAbsent: [ nil ]])
 ]
 
 { #category : #arrows }
-Connection >> arrowScales [
+ConnectionMorph >> arrowScales [
 	"Answer the arrow scales relative to my linewidth"
 	^arrowScales ifNil: [ { 1.0@1.0. 1.0@1.0 }].
 ]
 
 { #category : #arrows }
-Connection >> arrowScales: aScalarOrArray [ 
+ConnectionMorph >> arrowScales: aScalarOrArray [ 
 	"Change the arrow scales relative to my linewidth"
 	
 	arrowScales := (aScalarOrArray isCollection
@@ -278,7 +278,7 @@ Connection >> arrowScales: aScalarOrArray [
 ]
 
 { #category : #arrows }
-Connection >> arrowVertices [
+ConnectionMorph >> arrowVertices [
 	"Answer my vertices, but with the first and last point from arrowJoints"
 	| retval |
 	retval := vertices collect: [ :v | v asFloatPoint ].
@@ -288,12 +288,12 @@ Connection >> arrowVertices [
 ]
 
 { #category : #arrows }
-Connection >> arrows [
+ConnectionMorph >> arrows [
 	^arrows ifNil: [ arrows := self arrows: {nil. nil} ].
 ]
 
 { #category : #arrows }
-Connection >> arrows: anArray [
+ConnectionMorph >> arrows: anArray [
 	"Given a pair of NCLineArrowGlyph instances at any scale,
 	scale them proportionally to my line width and save copies."
 	| newArrows |
@@ -310,21 +310,21 @@ Connection >> arrows: anArray [
 ]
 
 { #category : #'geometry testing' }
-Connection >> arrowsContainPoint: aPoint [
+ConnectionMorph >> arrowsContainPoint: aPoint [
 	"Answer an Array of two Booleans that indicate whether the given point is inside either arrow"
 	^self arrowForms collect: [:f | (f pixelValueAt: aPoint - f offset) > 0 ].
 
 ]
 
 { #category : #accessing }
-Connection >> beSmoothCurve [
+ConnectionMorph >> beSmoothCurve [
 	self isCurve ifFalse: [
 		smoothCurve := true.
 		self computeBounds]
 ]
 
 { #category : #appearance }
-Connection >> beSmoothCurve: aBoolean [
+ConnectionMorph >> beSmoothCurve: aBoolean [
 	aBoolean
 		ifTrue: [ self beSmoothCurve ]
 		ifFalse: [ self beStraightSegments ]
@@ -332,7 +332,7 @@ Connection >> beSmoothCurve: aBoolean [
 ]
 
 { #category : #accessing }
-Connection >> beStraightSegments [
+ConnectionMorph >> beStraightSegments [
 
 	self isCurve ifTrue: [
 		smoothCurve := false.
@@ -340,7 +340,7 @@ Connection >> beStraightSegments [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> bezierPoints [
+ConnectionMorph >> bezierPoints [
 	"Answer nVertices*3 points that are the control points for my bezier curves."
 
 	| pts i |
@@ -357,44 +357,44 @@ Connection >> bezierPoints [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> bezierSegmentsDo: segmentBlock [ 
+ConnectionMorph >> bezierSegmentsDo: segmentBlock [ 
 	"Emit a sequence of LineSegment subinstances into segmentBlock"
 	self segmentsDo: [ :s | segmentBlock value: s asBezier2Segment ]
 ]
 
 { #category : #testing }
-Connection >> canDrawBorder: aBorderStyle [
+ConnectionMorph >> canDrawBorder: aBorderStyle [
 	^aBorderStyle style == #simple
 ]
 
 { #category : #'visual properties' }
-Connection >> canHaveFillStyles [
+ConnectionMorph >> canHaveFillStyles [
 	"Return true if the receiver can have general fill styles; not just colors.
 	This method is for gradually converting old morphs."
 	^true
 ]
 
 { #category : #accessing }
-Connection >> close [ 
+ConnectionMorph >> close [ 
 	connectionPoints do:[:each| each dettachFrom: self ].
 	self delete.
 ]
 
 { #category : #'geometry testing' }
-Connection >> closestPointTo: aPoint [
+ConnectionMorph >> closestPointTo: aPoint [
 	| curveInfo |
 	curveInfo := self curveInfoNearest: aPoint.
 	^curveInfo closestPoint.
 ]
 
 { #category : #'geometry testing' }
-Connection >> closestSegmentTo: aPoint [
+ConnectionMorph >> closestSegmentTo: aPoint [
 	"Answer the starting index of my (big) segment nearest to aPoint"
 	^(self curveInfoNearest: aPoint) closestBigSegment
 ]
 
 { #category : #geometry }
-Connection >> computeBounds [
+ConnectionMorph >> computeBounds [
 	| oldFullBounds oldBounds delta |
 	vertices ifNil: [^self].
 	oldFullBounds := (fullBounds ifNil: [bounds]) copy.
@@ -422,7 +422,7 @@ Connection >> computeBounds [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> computeContours [
+ConnectionMorph >> computeContours [
 	| sides csize |
 	(vertices size = 2 and: [vertices first = vertices second]) 
 		ifTrue: [^contours := #()].
@@ -449,7 +449,7 @@ Connection >> computeContours [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> computeSegments [
+ConnectionMorph >> computeSegments [
 	| segs v3 l1 l2 m1 m2 lastUsed end arrowVertices |
 	arrowVertices := self arrowVertices.
 	arrowVertices size = 2 
@@ -509,24 +509,19 @@ Connection >> computeSegments [
 	^segs asArray 
 ]
 
-{ #category : #editing }
-Connection >> connectionFactory [
-	^connectionFactory ifNil:[connectionFactory := ConnectionFactory new]
-]
-
 { #category : #accessing }
-Connection >> connectionFactory: anObject [
+ConnectionMorph >> connectionFactory: anObject [
 	^ connectionFactory := anObject
 ]
 
 { #category : #connecting }
-Connection >> connectionPoints: aCollection [ 
+ConnectionMorph >> connectionPoints: aCollection [ 
 	connectionPoints at: 1 put: aCollection first .
 	connectionPoints at:2 put: aCollection second  .
 ]
 
 { #category : #'geometry testing' }
-Connection >> containsPoint: aPoint [
+ConnectionMorph >> containsPoint: aPoint [
 	(super containsPoint: aPoint) ifFalse: [^ false].
 	(self hasProperty: #errorOnDraw) ifTrue: [^true].
 	
@@ -545,7 +540,7 @@ Connection >> containsPoint: aPoint [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> contourPoints [
+ConnectionMorph >> contourPoints [
 	"Answer my contours flattened as a series of points."
 
 	^Array streamContents: [ :s |
@@ -553,7 +548,7 @@ Connection >> contourPoints [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> contours [
+ConnectionMorph >> contours [
 	contours ifNotNil: [^contours].
 	(vertices size = 2 and: [vertices first = vertices second]) 
 		ifTrue: [^contours := #()].
@@ -561,24 +556,24 @@ Connection >> contours [
 ]
 
 { #category : #accessing }
-Connection >> couldHaveRoundedCorners [
+ConnectionMorph >> couldHaveRoundedCorners [
 	^ false
 ]
 
 { #category : #geometry }
-Connection >> curveBounds [
+ConnectionMorph >> curveBounds [
 
 	^(Rectangle encompassing: self contourPoints)
 		expandBy: (self borderWidth + 4.0)
 ]
 
 { #category : #editing }
-Connection >> curveHandleClass [ 
-	^self connectionFactory curveHandleClass 
+ConnectionMorph >> curveHandleClass [ 
+	^ NCCurveHandleMorph
 ]
 
 { #category : #'geometry testing' }
-Connection >> curveInfoNearest: aPoint [ 
+ConnectionMorph >> curveInfoNearest: aPoint [ 
 	"Answer the index of the segment nearest aPoint, along with the closest point, its distance, and the parametric value. "
 
 	| closestPoint minDist minT segmentIndex |
@@ -606,12 +601,12 @@ Connection >> curveInfoNearest: aPoint [
 ]
 
 { #category : #editing }
-Connection >> curveSegmentAt: n [ 
+ConnectionMorph >> curveSegmentAt: n [ 
 	^(self vertices at: n) + (self vertices at: (n + 1 min: vertices size)) / 2
 ]
 
 { #category : #editing }
-Connection >> curveSegmentAt: n put: aPoint [
+ConnectionMorph >> curveSegmentAt: n put: aPoint [
 	| delta newVerts |
 	(n between: 2 and: vertices size - 1) ifFalse: [ ^false ].
 	delta := (self curveSegmentAt: n) - aPoint.
@@ -624,7 +619,7 @@ Connection >> curveSegmentAt: n put: aPoint [
 ]
 
 { #category : #accessing }
-Connection >> curveVertexAt: n [
+ConnectionMorph >> curveVertexAt: n [
 	"Answer the point on the visible curve corresponding to the given vertex."
 	| index seg |
 	index := (n min: vertices size) max: 1.
@@ -635,7 +630,7 @@ Connection >> curveVertexAt: n [
 ]
 
 { #category : #editing }
-Connection >> curveVertexAt: index put: aPoint [
+ConnectionMorph >> curveVertexAt: index put: aPoint [
 	"Set the point on the visible curve corresponding to the given vertex."
 	| seg error actual attempts |
 	(index between: 1 and: vertices size) ifFalse: [ ^false ].
@@ -654,12 +649,12 @@ Connection >> curveVertexAt: index put: aPoint [
 ]
 
 { #category : #appearance }
-Connection >> dashedBorder: dashed [
+ConnectionMorph >> dashedBorder: dashed [
 	borderDashSpec := dashed 
 ]
 
 { #category : #appearance }
-Connection >> dashedLine: aBoolean [
+ConnectionMorph >> dashedLine: aBoolean [
 	| dashed |
 	aBoolean ifTrue: [ dashed := { self lineWidth * 4 . self lineWidth * 3 . Color transparent . 0} ].
 	self dashedBorder: dashed.	
@@ -667,29 +662,29 @@ Connection >> dashedLine: aBoolean [
 ]
 
 { #category : #arrows }
-Connection >> defaultArrow [
-	^self connectionFactory defaultArrow
+ConnectionMorph >> defaultArrow [
+	^ NCLineArrowGlyph noArrow
 ]
 
 { #category : #initialization }
-Connection >> defaultBackgroundColor [
+ConnectionMorph >> defaultBackgroundColor [
 	^ Color black 
 ]
 
 { #category : #'visual properties' }
-Connection >> defaultBitmapFillForm [
+ConnectionMorph >> defaultBitmapFillForm [
 	^Imports default imports
 		at: 'checker' ifAbsent: [ super defaultBitmapFillForm ]
 
 ]
 
 { #category : #appearance }
-Connection >> doesBevels [
+ConnectionMorph >> doesBevels [
 	^false
 ]
 
 { #category : #drawing }
-Connection >> drawDashedBorderOn: aCanvas usingEnds: anArray [ 
+ConnectionMorph >> drawDashedBorderOn: aCanvas usingEnds: anArray [ 
 	"Display my border on the canvas. NOTE: mostly copied from  
 	drawBorderOn:"
 	| bevel topLeftColor bottomRightColor bigClipRect lineColor segmentOffset |
@@ -725,7 +720,7 @@ Connection >> drawDashedBorderOn: aCanvas usingEnds: anArray [
 ]
 
 { #category : #drawing }
-Connection >> drawOn: aCanvas [ 
+ConnectionMorph >> drawOn: aCanvas [ 
 	| ballonCanvas isShadow |
 	ballonCanvas := aCanvas asBalloonCanvas.
 	ballonCanvas
@@ -748,7 +743,7 @@ Connection >> drawOn: aCanvas [
 ]
 
 { #category : #drawing }
-Connection >> drawSegmentedCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
+ConnectionMorph >> drawSegmentedCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
 	| c bw bc |
 	c := isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self fillStyle].
 	bw := self borderWidth.
@@ -785,7 +780,7 @@ Connection >> drawSegmentedCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: i
 ]
 
 { #category : #drawing }
-Connection >> drawSmoothCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
+ConnectionMorph >> drawSmoothCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
 	aaCanvas 
 		drawGeneralBezierShape: self contours
 		color: (isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self fillStyle])
@@ -797,7 +792,7 @@ Connection >> drawSmoothCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isSh
 ]
 
 { #category : #geometry }
-Connection >> extent: newExtent [ 
+ConnectionMorph >> extent: newExtent [ 
 	"Not really advisable, but we can preserve most of the geometry if we don't
 	shrink things too small."
 	| safeExtent center |
@@ -809,12 +804,12 @@ Connection >> extent: newExtent [
 ]
 
 { #category : #accessing }
-Connection >> firstVertex [
+ConnectionMorph >> firstVertex [
 	^vertices first
 ]
 
 { #category : #connecting }
-Connection >> from: origin to: destination [ 
+ConnectionMorph >> from: origin to: destination [ 
 
 	self vertices: {origin position . destination position}.
 	origin attachTailOf: self .
@@ -824,14 +819,14 @@ Connection >> from: origin to: destination [
 ]
 
 { #category : #geometry }
-Connection >> fullBounds [
+ConnectionMorph >> fullBounds [
 	^fullBounds ifNil: [
 		self computeBounds.
 		fullBounds := self outerBounds ].
 ]
 
 { #category : #arrows }
-Connection >> fullLineWidth [
+ConnectionMorph >> fullLineWidth [
 	| bw bc |
 	bw := 0.
 	bc := self borderColor. 
@@ -840,40 +835,40 @@ Connection >> fullLineWidth [
 ]
 
 { #category : #arrows }
-Connection >> hasArrows [
+ConnectionMorph >> hasArrows [
 	^(self arrows includes: nil) not
 ]
 
 { #category : #updating }
-Connection >> hasMouseFocus [
+ConnectionMorph >> hasMouseFocus [
 	^ self activeHand mouseFocus = self 
 ]
 
 { #category : #accessing }
-Connection >> headConnectionPoint [ 
+ConnectionMorph >> headConnectionPoint [ 
 	^ connectionPoints second 
 	
 ]
 
 { #category : #'as yet unclassified' }
-Connection >> headConnectionPointCenter [
+ConnectionMorph >> headConnectionPointCenter [
 	^self headConnectionPoint center 
 ]
 
 { #category : #'rotate scale' }
-Connection >> heading: newHeading [
+ConnectionMorph >> heading: newHeading [
 	"Set the receiver's heading (in eToy terms).
 	Note that polygons never use flex shells."
 	self rotationDegrees: newHeading.
 ]
 
 { #category : #'gaucho-created' }
-Connection >> iconsSpecsOnClick [
+ConnectionMorph >> iconsSpecsOnClick [
 	^ {'move'}
 ]
 
 { #category : #initialization }
-Connection >> initialize [
+ConnectionMorph >> initialize [
 	connectionPoints := Array new:2.
 	smoothCurve := false.
 	submorphs := #().
@@ -891,12 +886,12 @@ Connection >> initialize [
 ]
 
 { #category : #geometry }
-Connection >> innerBounds [
+ConnectionMorph >> innerBounds [
 	^self bounds
 ]
 
 { #category : #editing }
-Connection >> insertVertexAfterEndAt: position [
+ConnectionMorph >> insertVertexAfterEndAt: position [
 	"insert another vertex, before first"
 
 	self setVertices: (self vertices copyWith: position) asArray.
@@ -904,7 +899,7 @@ Connection >> insertVertexAfterEndAt: position [
 ]
 
 { #category : #editing }
-Connection >> insertVertexBeforeStartAt: position [
+ConnectionMorph >> insertVertexBeforeStartAt: position [
 	"insert another vertex, before first"
 
 	self setVertices: ({ position }, self vertices) asArray.
@@ -912,19 +907,19 @@ Connection >> insertVertexBeforeStartAt: position [
 ]
 
 { #category : #editing }
-Connection >> interiorCurveSegmentAt: n put: aPoint [
+ConnectionMorph >> interiorCurveSegmentAt: n put: aPoint [
 	^self curveSegmentAt: n put: aPoint
 
 ]
 
 { #category : #editing }
-Connection >> interiorCurveVertexAt: index put: aPoint [
+ConnectionMorph >> interiorCurveVertexAt: index put: aPoint [
 	(index = 1 or: [ index = vertices size ]) ifTrue: [ ^true ].
 	^self curveVertexAt: index put: aPoint
 ]
 
 { #category : #'geometry testing' }
-Connection >> intersectionsWith: aRectangle [
+ConnectionMorph >> intersectionsWith: aRectangle [
 	"Answer a Set of points where the given Rectangle intersects with me.
 	Ignores arrowForms."
 
@@ -941,29 +936,29 @@ Connection >> intersectionsWith: aRectangle [
 ]
 
 { #category : #accessing }
-Connection >> isCurve [
+ConnectionMorph >> isCurve [
 	^smoothCurve ifNil: [ smoothCurve := false ]
 ]
 
 { #category : #accessing }
-Connection >> lastVertex [
+ConnectionMorph >> lastVertex [
 	^vertices last
 ]
 
 { #category : #'visual properties' }
-Connection >> lineColor [
+ConnectionMorph >> lineColor [
 
 	^self fillStyle
 ]
 
 { #category : #'visual properties' }
-Connection >> lineColor: newColor [
+ConnectionMorph >> lineColor: newColor [
 	self fillStyle: newColor
 
 ]
 
 { #category : #'geometry-curves' }
-Connection >> lineSegments [
+ConnectionMorph >> lineSegments [
 	| segs |
 	segs := OrderedCollection new.
 	self lineSegmentsDo: [ :p1 :p2 | segs add: (LineSegment from: p1 to: p2) ].
@@ -971,17 +966,17 @@ Connection >> lineSegments [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> lineSegmentsDo: aBlock [
+ConnectionMorph >> lineSegmentsDo: aBlock [
 	self segmentsDo: [ :seg | seg lineSegmentsDo: aBlock ]
 ]
 
 { #category : #accessing }
-Connection >> lineWidth [
+ConnectionMorph >> lineWidth [
 	^lineWidth
 ]
 
 { #category : #accessing }
-Connection >> lineWidth: aNumber [ 
+ConnectionMorph >> lineWidth: aNumber [ 
 	| ratio oldWidth |
 	oldWidth := self fullLineWidth.
 	lineWidth := aNumber.
@@ -991,7 +986,7 @@ Connection >> lineWidth: aNumber [
 ]
 
 { #category : #accessing }
-Connection >> lostMouseFocus [
+ConnectionMorph >> lostMouseFocus [
 	| fillStyle |
 	fillStyle  := self backgroundColor .
 	self fillStyle:  fillStyle.
@@ -999,27 +994,27 @@ Connection >> lostMouseFocus [
 ]
 
 { #category : #arrows }
-Connection >> makeBackArrow [
+ConnectionMorph >> makeBackArrow [
 	self arrowNames: #(basicArrow noArrow)
 ]
 
 { #category : #arrows }
-Connection >> makeBothArrows [
+ConnectionMorph >> makeBothArrows [
 	self arrowNames: #( basicArrow basicArrow)
 ]
 
 { #category : #arrows }
-Connection >> makeForwardArrow [
+ConnectionMorph >> makeForwardArrow [
 	self arrowNames: #( noArrow basicArrow)
 ]
 
 { #category : #arrows }
-Connection >> makeNoArrows [
+ConnectionMorph >> makeNoArrows [
 	self arrowNames: #( noArrow noArrow)
 ]
 
 { #category : #geometry }
-Connection >> midpoint [
+ConnectionMorph >> midpoint [
 	"Answer the midpoint along my segments"
 	| middle |
 	middle := 0.
@@ -1036,7 +1031,7 @@ Connection >> midpoint [
 ]
 
 { #category : #private }
-Connection >> nextDuplicateVertexIndex [
+ConnectionMorph >> nextDuplicateVertexIndex [
 	vertices
 		doWithIndex: [:vert :index | ((index between: 2 and: vertices size - 1)
 					and: [| epsilon v1 v2 | 
@@ -1053,17 +1048,17 @@ Connection >> nextDuplicateVertexIndex [
 ]
 
 { #category : #geometry }
-Connection >> nextToFirstPoint [
+ConnectionMorph >> nextToFirstPoint [
 	^vertices second
 ]
 
 { #category : #geometry }
-Connection >> nextToLastPoint [
+ConnectionMorph >> nextToLastPoint [
 	^vertices at: vertices size - 1
 ]
 
 { #category : #accessing }
-Connection >> oldBorderWidth: anInteger [ 
+ConnectionMorph >> oldBorderWidth: anInteger [ 
 	| ratio newWidth oldWidth borderColor borderWidth |
 	oldWidth := self fullLineWidth.
 	anInteger > 0 ifTrue: [borderColor ifNil: [borderColor := Color black]].
@@ -1075,12 +1070,12 @@ Connection >> oldBorderWidth: anInteger [
 ]
 
 { #category : #geometry }
-Connection >> outerBounds [
+ConnectionMorph >> outerBounds [
 	^self curveBounds
 ]
 
 { #category : #'geometry-curves' }
-Connection >> outsideBezierPoints [
+ConnectionMorph >> outsideBezierPoints [
 	"Answer the nVertices + 1 *6 points that are the boundary points for two sets of bezier curves that define my outer bounds."
 
 	| npts a b halfWidth normal ptsA ptsB tan1 tan2 angle1 angle2 halfAngle midAngle r delta |
@@ -1146,7 +1141,7 @@ Connection >> outsideBezierPoints [
 ]
 
 { #category : #'geometry-curves' }
-Connection >> outsidePoints [
+ConnectionMorph >> outsidePoints [
 	"Answer the nVertices *2 points that are the boundary points for two sets of lines that define my outer bounds."
 
 	| npts a b halfWidth normal ptsA ptsB tan1 tan2 angle1 angle2 halfAngle midAngle r delta arrowVertices |
@@ -1214,7 +1209,7 @@ Connection >> outsidePoints [
 ]
 
 { #category : #private }
-Connection >> privateMoveBy: delta [
+ConnectionMorph >> privateMoveBy: delta [
 	super privateMoveBy: delta.
 	(self valueOfProperty: #referencePosition) ifNotNilDo:
 		[:oldPos | self setProperty: #referencePosition toValue: oldPos + delta].
@@ -1223,7 +1218,7 @@ Connection >> privateMoveBy: delta [
 ]
 
 { #category : #geometry }
-Connection >> reduceVertices [
+ConnectionMorph >> reduceVertices [
 	"Reduces the vertices size, when 3 vertices are on the same line with a 
 	little epsilon. Based on code by Steffen Mueller"
 	| dup |
@@ -1234,14 +1229,14 @@ Connection >> reduceVertices [
 ]
 
 { #category : #'rotate scale' }
-Connection >> referencePosition [ 
+ConnectionMorph >> referencePosition [ 
 	"Return the current reference position of the receiver"
 	^ self valueOfProperty: #referencePosition ifAbsent: [ self midpoint ]
 
 ]
 
 { #category : #geometry }
-Connection >> removeShortEndSegmentsStepping: stepBlock [
+ConnectionMorph >> removeShortEndSegmentsStepping: stepBlock [
 	| v1 v2 n minLength |
 	minLength := 30.
 	
@@ -1263,12 +1258,12 @@ Connection >> removeShortEndSegmentsStepping: stepBlock [
 ]
 
 { #category : #editing }
-Connection >> removeVertex: aVertex [
+ConnectionMorph >> removeVertex: aVertex [
 	^self setVertices: (self vertices copyWithout: aVertex)
 ]
 
 { #category : #'rotate scale' }
-Connection >> rotationCenter [
+ConnectionMorph >> rotationCenter [
 	"Return the rotation center of the receiver. The rotation center defines the relative offset inside the receiver's bounds for locating the reference position."
 	| refPos |
 	refPos := self valueOfProperty: #referencePosition
@@ -1277,7 +1272,7 @@ Connection >> rotationCenter [
 ]
 
 { #category : #'rotate scale' }
-Connection >> rotationCenter: aPointOrNil [
+ConnectionMorph >> rotationCenter: aPointOrNil [
 	"Set the new rotation center of the receiver. The rotation center defines the relative offset inside the receiver's bounds for locating the reference position."
 	| box |
 	aPointOrNil isNil
@@ -1289,13 +1284,13 @@ Connection >> rotationCenter: aPointOrNil [
 ]
 
 { #category : #'rotate scale' }
-Connection >> rotationDegrees [
+ConnectionMorph >> rotationDegrees [
 
 	^ self forwardDirection
 ]
 
 { #category : #'rotate scale' }
-Connection >> rotationDegrees: degrees [ 
+ConnectionMorph >> rotationDegrees: degrees [ 
 	| flex center |
 	center := self referencePosition.
 	flex := (MorphicTransform offset: center negated)
@@ -1307,13 +1302,13 @@ Connection >> rotationDegrees: degrees [
 ]
 
 { #category : #'rotate scale' }
-Connection >> scale [
+ConnectionMorph >> scale [
 	^self valueOfProperty: #scaleFactor ifAbsent: [ 1.0 ]
 
 ]
 
 { #category : #'rotate scale' }
-Connection >> scale: scaleFactor [ 
+ConnectionMorph >> scale: scaleFactor [ 
 	| flex center ratio |
 	ratio := self scaleFactor / scaleFactor.
 	self lineWidth: self lineWidth / ratio.
@@ -1329,20 +1324,20 @@ Connection >> scale: scaleFactor [
 ]
 
 { #category : #accessing }
-Connection >> segments [
+ConnectionMorph >> segments [
 	^segments ifNil: 
 			[segments := self computeSegments segments do: [:ea | ea roundTo: 0.001]]
 ]
 
 { #category : #'geometry-curves' }
-Connection >> segmentsDo: segmentBlock [ 
+ConnectionMorph >> segmentsDo: segmentBlock [ 
 	"Emit a sequence of LineSegment subinstances into segmentBlock"
 
 	self segments do: segmentBlock
 ]
 
 { #category : #editing }
-Connection >> setVertices: newVertices [
+ConnectionMorph >> setVertices: newVertices [
 
 	| proposedVertices |
 	vertices = newVertices ifTrue: [ ^self ].
@@ -1365,52 +1360,52 @@ Connection >> setVertices: newVertices [
 ]
 
 { #category : #editing }
-Connection >> straighten [
+ConnectionMorph >> straighten [
 	self setVertices: { vertices first . vertices last }
 ]
 
 { #category : #accessing }
-Connection >> tailConnectionPoint [ 
+ConnectionMorph >> tailConnectionPoint [ 
 	^ connectionPoints first  
 	
 ]
 
 { #category : #accessing }
-Connection >> tailConnectionPointCenter [
+ConnectionMorph >> tailConnectionPointCenter [
 	^ self tailConnectionPoint center
 	
 ]
 
 { #category : #connecting }
-Connection >> to: destination [ 
+ConnectionMorph >> to: destination [ 
 	self from: self tailConnectionPoint  to: destination 
 ]
 
 { #category : #accessing }
-Connection >> toggleSmoothing [
+ConnectionMorph >> toggleSmoothing [
 
 	smoothCurve := smoothCurve not.
 	self computeBounds
 ]
 
 { #category : #accessing }
-Connection >> totalLength [
+ConnectionMorph >> totalLength [
 	"Answer the full length of my segments. Can take a long time if I'm curved."
 	^self segments detectSum: [ :seg | seg length ]
 ]
 
 { #category : #'rotate scale' }
-Connection >> transformedBy: aTransform [
+ConnectionMorph >> transformedBy: aTransform [
 	self setVertices: (self vertices collect:[:v| aTransform localPointToGlobal: v])
 ]
 
 { #category : #accessing }
-Connection >> unrotatedWidth [
+ConnectionMorph >> unrotatedWidth [
 	^self lineWidth
 ]
 
 { #category : #arrows }
-Connection >> updateArrowContours [
+ConnectionMorph >> updateArrowContours [
 	"Open the arrows for my line width.
 	Set contours[2] and contours[4] with arrow contours.
 	Put the arrow join points into arrowJoints."
@@ -1438,18 +1433,18 @@ Connection >> updateArrowContours [
 ]
 
 { #category : #'gaucho-created' }
-Connection >> updateHeadVertex [
+ConnectionMorph >> updateHeadVertex [
 	self verticesAt: vertices size put: self headConnectionPointCenter .
 
 ]
 
 { #category : #'gaucho-created' }
-Connection >> updateTailVertex [
+ConnectionMorph >> updateTailVertex [
 	self verticesAt: 1 put: self tailConnectionPointCenter 
 ]
 
 { #category : #updating }
-Connection >> updateView [ 
+ConnectionMorph >> updateView [ 
 	self
 		updateTailVertex ;
 		updateHeadVertex;
@@ -1457,28 +1452,28 @@ Connection >> updateView [
 ]
 
 { #category : #accessing }
-Connection >> vertexAt: n [
+ConnectionMorph >> vertexAt: n [
 	^vertices at: (n min: vertices size).
 ]
 
 { #category : #drawing }
-Connection >> vertexPairsDo: aBlock [ 
+ConnectionMorph >> vertexPairsDo: aBlock [ 
 	"Emit pairs of start/end points into aBlock"
 	vertices overlappingPairsDo: aBlock
 ]
 
 { #category : #accessing }
-Connection >> vertices [
+ConnectionMorph >> vertices [
 	^ vertices
 ]
 
 { #category : #accessing }
-Connection >> vertices: anArray [ 
+ConnectionMorph >> vertices: anArray [ 
 	self setVertices: anArray .
 ]
 
 { #category : #initialization }
-Connection >> vertices: verts color: aColor borderStyle: aBorderStyle [ 
+ConnectionMorph >> vertices: verts color: aColor borderStyle: aBorderStyle [ 
 	lineWidth := aBorderStyle width .
 	self setVertices: verts.
 	self fillStyle: aColor.
@@ -1486,7 +1481,7 @@ Connection >> vertices: verts color: aColor borderStyle: aBorderStyle [
 ]
 
 { #category : #initialization }
-Connection >> vertices: verts lineWidth: w lineColor: aColor borderStyle: aBorderStyle [ 
+ConnectionMorph >> vertices: verts lineWidth: w lineColor: aColor borderStyle: aBorderStyle [ 
 	lineWidth := w .
 	self setVertices: verts.
 	self fillStyle: aColor .
@@ -1495,7 +1490,7 @@ Connection >> vertices: verts lineWidth: w lineColor: aColor borderStyle: aBorde
 ]
 
 { #category : #editing }
-Connection >> verticesAt: n put: newPoint [
+ConnectionMorph >> verticesAt: n put: newPoint [
 	| index |
 	index := (n min: vertices size) max: 1.
 	self setVertices: (vertices copy at: index put: newPoint; yourself).
