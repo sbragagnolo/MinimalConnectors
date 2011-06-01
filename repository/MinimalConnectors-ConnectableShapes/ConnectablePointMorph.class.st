@@ -1,22 +1,22 @@
 Class {
-	#name : #ConnectablePoint,
+	#name : #ConnectablePointMorph,
 	#superclass : #Morph,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> addMorph: aMorph [
+ConnectablePointMorph >> addMorph: aMorph [
 	super addMorph: aMorph.
 	aMorph center: self center.
 ]
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> connections [
+ConnectablePointMorph >> connections [
 	^self submorphs inject: Set new into:[:conns :point | conns union: point connections ]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> initialize [ 
+ConnectablePointMorph >> initialize [ 
 	super initialize.
 	self extent: 1@1.
 	self color: Color transparent.
@@ -25,16 +25,16 @@ ConnectablePoint >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> points [
+ConnectablePointMorph >> points [
 	^self submorphs 
 ]
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> updateLayout [
+ConnectablePointMorph >> updateLayout [
 	self center: owner center.
 ]
 
 { #category : #'as yet unclassified' }
-ConnectablePoint >> updateView [
+ConnectablePointMorph >> updateView [
 	"self comeToFront."
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #ConnectableBoundingCircle,
+	#name : #ConnectableBoundingCircleMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'points',
@@ -9,33 +9,33 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
+ConnectableBoundingCircleMorph >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
 	(self connectionNear: aShape ) addMorph: aConnectionPoint .
 	 
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> bottomPoint [
-	^self points at: 3 ifAbsentPut:[ConnectablePoint new center: self bottomCenter]
+ConnectableBoundingCircleMorph >> bottomPoint [
+	^self points at: 3 ifAbsentPut:[ConnectablePointMorph new center: self bottomCenter]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> centerPoint [
-	^center ifNil:[center:= ConnectablePoint new center: self center]
+ConnectableBoundingCircleMorph >> centerPoint [
+	^center ifNil:[center:= ConnectablePointMorph new center: self center]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> connectionNear: anotherConnectableShape [
-	^self points add: (ConnectablePoint new center: (owner closestPointTo: anotherConnectableShape center))
+ConnectableBoundingCircleMorph >> connectionNear: anotherConnectableShape [
+	^self points add: (ConnectablePointMorph new center: (owner closestPointTo: anotherConnectableShape center))
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> connections [
+ConnectableBoundingCircleMorph >> connections [
 	^(self submorphs select:[:sub | sub isKindOf: ConnectionMorph ]) union:(self points inject: Set new into:[:conns :point | conns union: point connections])
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> initialize [ 
+ConnectableBoundingCircleMorph >> initialize [ 
 	super initialize.
 	self color: Color transparent.
 	self borderColor: Color black.
@@ -48,37 +48,37 @@ ConnectableBoundingCircle >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> leftPoint [
-	^self points at: 4 ifAbsentPut:[ConnectablePoint new center: self leftCenter]
+ConnectableBoundingCircleMorph >> leftPoint [
+	^self points at: 4 ifAbsentPut:[ConnectablePointMorph new center: self leftCenter]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> points [
+ConnectableBoundingCircleMorph >> points [
 	^points
 ]
 
 { #category : #updating }
-ConnectableBoundingCircle >> resetConnectionPoints [
+ConnectableBoundingCircleMorph >> resetConnectionPoints [
 	self points do:[:point | point removeAllMorphs ]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> rightPoint [
-	^self points at: 2 ifAbsentPut:[ConnectablePoint new center: self rightCenter]
+ConnectableBoundingCircleMorph >> rightPoint [
+	^self points at: 2 ifAbsentPut:[ConnectablePointMorph new center: self rightCenter]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> topPoint [
-	^self points at: 1 ifAbsentPut:[ ConnectablePoint new center: self topCenter]
+ConnectableBoundingCircleMorph >> topPoint [
+	^self points at: 1 ifAbsentPut:[ ConnectablePointMorph new center: self topCenter]
 ]
 
 { #category : #updating }
-ConnectableBoundingCircle >> updateConnections [
+ConnectableBoundingCircleMorph >> updateConnections [
 	self connections do:[:conn | conn  updateView; updateLabel.]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingCircle >> updateLayout [ 
+ConnectableBoundingCircleMorph >> updateLayout [ 
 	self bounds: owner bounds.
 	self center: owner center.
 	"self leftPoint center: self leftCenter.
@@ -93,6 +93,6 @@ ConnectableBoundingCircle >> updateLayout [
 ]
 
 { #category : #updating }
-ConnectableBoundingCircle >> updateView [
+ConnectableBoundingCircleMorph >> updateView [
 	
 ]

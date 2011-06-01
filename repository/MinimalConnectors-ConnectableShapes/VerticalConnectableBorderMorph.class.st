@@ -1,11 +1,11 @@
 Class {
-	#name : #VerticalConnectableBorder,
-	#superclass : #ConnectableBorder,
+	#name : #VerticalConnectableBorderMorph,
+	#superclass : #ConnectableBorderMorph,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 
 { #category : #'as yet unclassified' }
-VerticalConnectableBorder >> initialize [ 
+VerticalConnectableBorderMorph >> initialize [ 
 	super initialize.
 	self 
 		color: Color transparent;
@@ -22,13 +22,13 @@ VerticalConnectableBorder >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-VerticalConnectableBorder >> updateLayout [
+VerticalConnectableBorderMorph >> updateLayout [
 	self height: owner height.
 	
 ]
 
 { #category : #'as yet unclassified' }
-VerticalConnectableBorder >> updateView [	
+VerticalConnectableBorderMorph >> updateView [	
 	self sortSubmorphsBy: [:s1 :s2 | s1 oppositeConnectionPoint top > s2 oppositeConnectionPoint top ].
 	self updateConnections.
 ]
