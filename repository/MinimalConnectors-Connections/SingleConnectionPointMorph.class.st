@@ -1,6 +1,6 @@
 Class {
-	#name : #SingleConnectionPoint,
-	#superclass : #Morph,
+	#name : #SingleConnectionPointMorph,
+	#superclass : #BorderedMorph,
 	#instVars : [
 		'outConnections',
 		'inConnections'
@@ -8,74 +8,74 @@ Class {
 	#category : #'MinimalConnectors-Connections'
 }
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> attachHeadOf: aConnector [ 
+{ #category : #private }
+SingleConnectionPointMorph >> attachHeadOf: aConnector [ 
 	(inConnections includes: aConnector) ifFalse:[ inConnections add: aConnector ].
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> attachTailOf: aConnector [
+{ #category : #private }
+SingleConnectionPointMorph >> attachTailOf: aConnector [
 	(outConnections includes: aConnector) ifFalse:[outConnections add: aConnector ].
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> borderColor [
-	^Color transparent 
-]
-
-{ #category : #accessing }
-SingleConnectionPoint >> close [ 
+SingleConnectionPointMorph >> close [ 
 	inConnections copy do:#close.
 	outConnections copy do:#close.
 
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> connectTo: anotherConnectionPoint [
+SingleConnectionPointMorph >> connectTo: anotherConnectionPoint [
 	| connector |
 	connector := self connectionClass from: self to: anotherConnectionPoint.
 	^ connector 
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> connection [
+SingleConnectionPointMorph >> connection [
 "This point will always have only one connection, refactors are still pending"
 	^ self connections anyOne
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> connectionClass [
+{ #category : #private }
+SingleConnectionPointMorph >> connectionClass [
 	^self factory connectionClass
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> connectionIndexOf: aConnection [
+{ #category : #private }
+SingleConnectionPointMorph >> connectionIndexOf: aConnection [
 	^(self connections includes: aConnection) 
 		ifTrue:[(self connections indexOf: aConnection) -1]
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> connections [
+SingleConnectionPointMorph >> connections [
 	^ inConnections , outConnections 
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> connectionsSize [
+SingleConnectionPointMorph >> connectionsSize [
 	^self connections size
 ]
 
-{ #category : #defaults }
-SingleConnectionPoint >> defaultBorderStyle [ 
-	^ BorderStyle simple width: 1 ; color: self borderColor  .
+{ #category : #initialization }
+SingleConnectionPointMorph >> defaultBorderColor [
+	^Color transparent 
 ]
 
-{ #category : #accessing }
-SingleConnectionPoint >> delta [
+{ #category : #'visual properties' }
+SingleConnectionPointMorph >> defaultColor [
+	^Color transparent  
+]
+
+{ #category : #private }
+SingleConnectionPointMorph >> delta [
 	^"owner delta"10
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> dettachFrom: aConnector [ 
+{ #category : #accessing }
+SingleConnectionPointMorph >> dettachFrom: aConnector [ 
 	|formerOwner|
 	inConnections remove: aConnector ifAbsent:[ ].
 	outConnections remove: aConnector ifAbsent:[].
@@ -85,32 +85,27 @@ SingleConnectionPoint >> dettachFrom: aConnector [
 ]
 
 { #category : #support }
-SingleConnectionPoint >> factory [
+SingleConnectionPointMorph >> factory [
 	^UMLFactory new
 ]
 
-{ #category : #'visual properties' }
-SingleConnectionPoint >> fillStyle [
-	^Color transparent  
-]
-
 { #category : #testing }
-SingleConnectionPoint >> hasConnections [
+SingleConnectionPointMorph >> hasConnections [
 	^ ( inConnections isEmpty and:[ outConnections isEmpty ] ) not
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> inConnections [
+SingleConnectionPointMorph >> inConnections [
 	^ inConnections 
 ]
 
-{ #category : #accessing }
-SingleConnectionPoint >> initialBounds [
+{ #category : #initialization }
+SingleConnectionPointMorph >> initialBounds [
 	^ 0@0 extent: 5@5.
 ]
 
 { #category : #initialization }
-SingleConnectionPoint >> initialize [ 
+SingleConnectionPointMorph >> initialize [ 
 	super initialize .
 	inConnections := OrderedCollection new.
 	outConnections := OrderedCollection new.
@@ -118,18 +113,18 @@ SingleConnectionPoint >> initialize [
 	
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> oppositeConnectionPoint [
+{ #category : #accessing }
+SingleConnectionPointMorph >> oppositeConnectionPoint [
 	^self connection connectionPoints detect:[:cp | cp ~= self]
 ]
 
 { #category : #accessing }
-SingleConnectionPoint >> outConnections [
+SingleConnectionPointMorph >> outConnections [
 	^ outConnections 
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> updateConnections [ 
+{ #category : #updating }
+SingleConnectionPointMorph >> updateConnections [ 
 	"inConnections do:[:each| each updateHeadVertex ].
 	outConnections do:[:each| each updateTailVertex ]."
 	self connections do:[:conn | conn  updateView; updateLabel]
@@ -137,27 +132,27 @@ SingleConnectionPoint >> updateConnections [
 ]
 
 { #category : #updating }
-SingleConnectionPoint >> updateConnectionsLabel [
+SingleConnectionPointMorph >> updateConnectionsLabel [
 	self connections do:[:conn | conn  updateLabel.]
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> updateFillStyle [ 
+{ #category : #updating }
+SingleConnectionPointMorph >> updateFillStyle [ 
 	self fillStyle: Color transparent 
 	
 
 ]
 
 { #category : #updating }
-SingleConnectionPoint >> updateView [ 
+SingleConnectionPointMorph >> updateView [ 
 	self
 		updateFillStyle ;
 		updateConnections.
 
 ]
 
-{ #category : #'as yet unclassified' }
-SingleConnectionPoint >> visible: aBoolean [ 
+{ #category : #accessing }
+SingleConnectionPointMorph >> visible: aBoolean [ 
 	super visible: aBoolean .
 	outConnections do:[:each| each visible: aBoolean ].
 	inConnections do:[:each| each visible: aBoolean  ].

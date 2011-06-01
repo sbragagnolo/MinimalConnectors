@@ -1,6 +1,6 @@
 Class {
 	#name : #ConnectionMorph,
-	#superclass : #ShapeMorph,
+	#superclass : #BorderedMorph,
 	#instVars : [
 		'lineWidth',
 		'smoothCurve',
@@ -13,8 +13,7 @@ Class {
 		'arrowJoints',
 		'connectionPoints',
 		'type',
-		'borderDashSpec',
-		'connectionFactory'
+		'borderDashSpec'
 	],
 	#classVars : [
 		'ArrowGlyphs'
@@ -48,8 +47,31 @@ ConnectionMorph class >> defaultArrow [
 ]
 
 { #category : #'instance creation' }
+ConnectionMorph class >> defaultConnection [
+	| m |
+	m := self new.
+	m
+		initializeWithVertices:  (Array 
+				with: 5 @ 0
+				with: 200 @ 100
+				with: 0 @ 200)
+		lineWidth: 2
+		lineColor: Color black  
+		borderStyle: ( BorderStyle width: 1 color: Color black ).
+	^ m
+		
+		
+]
+
+{ #category : #'instance creation' }
+ConnectionMorph class >> example [
+	^ self newWithArrow
+
+]
+
+{ #category : #'instance creation' }
 ConnectionMorph class >> from: startConnectionPoint to: stopConnectionPoint [ 
-	^self new from: startConnectionPoint to: stopConnectionPoint
+	^self defaultConnection from: startConnectionPoint to: stopConnectionPoint
 
 ]
 
@@ -92,7 +114,7 @@ ConnectionMorph class >> newAssociation [
 
 { #category : #'instance creation' }
 ConnectionMorph class >> newCurvyArrow [
-	^ self new
+	^ self defaultConnection
 		beSmoothCurve;
 		name: 'Curvy ConnectorArrow';
 		arrowNames: #(#noArrow #basicArrow )
@@ -100,7 +122,7 @@ ConnectionMorph class >> newCurvyArrow [
 
 { #category : #'instance creation' }
 ConnectionMorph class >> newCurvyConnector [
-	^ self new
+	^ self defaultConnection
 		beSmoothCurve;
 		name: 'Curvy Connector';
 		arrowNames: #(#noArrow #noArrow )
@@ -160,7 +182,7 @@ ConnectionMorph class >> newStateTransition [
 
 { #category : #'instance creation' }
 ConnectionMorph class >> newWithArrow [
-	^ self new
+	^ self defaultConnection
 		name: 'Arrow';
 		arrowNames: #(#noArrow #basicArrow )
 ]
@@ -207,13 +229,13 @@ ConnectionMorph class >> umlArrow [
 ]
 
 { #category : #'instance creation' }
-ConnectionMorph class >> vertices: verts color: c borderStyle: aBorderStyle [ 
-	^ self new vertices: verts color: c borderStyle: aBorderStyle 
-]
-
-{ #category : #'instance creation' }
 ConnectionMorph class >> vertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle [ 
-	^ self new vertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle 
+	| m |
+	m := self new.
+	m initializeWithVertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle.
+	^ m
+		
+		
 ]
 
 { #category : #drawing }
@@ -367,13 +389,6 @@ ConnectionMorph >> canDrawBorder: aBorderStyle [
 	^aBorderStyle style == #simple
 ]
 
-{ #category : #'visual properties' }
-ConnectionMorph >> canHaveFillStyles [
-	"Return true if the receiver can have general fill styles; not just colors.
-	This method is for gradually converting old morphs."
-	^true
-]
-
 { #category : #accessing }
 ConnectionMorph >> close [ 
 	connectionPoints do:[:each| each dettachFrom: self ].
@@ -507,11 +522,6 @@ ConnectionMorph >> computeSegments [
 						from: lastUsed
 						to: v3)].
 	^segs asArray 
-]
-
-{ #category : #accessing }
-ConnectionMorph >> connectionFactory: anObject [
-	^ connectionFactory := anObject
 ]
 
 { #category : #connecting }
@@ -667,15 +677,13 @@ ConnectionMorph >> defaultArrow [
 ]
 
 { #category : #initialization }
-ConnectionMorph >> defaultBackgroundColor [
-	^ Color black 
+ConnectionMorph >> defaultBorderColor [
+	^ Color black
 ]
 
-{ #category : #'visual properties' }
-ConnectionMorph >> defaultBitmapFillForm [
-	^Imports default imports
-		at: 'checker' ifAbsent: [ super defaultBitmapFillForm ]
-
+{ #category : #initialization }
+ConnectionMorph >> defaultBorderWidth [
+	^ 1
 ]
 
 { #category : #appearance }
@@ -745,7 +753,7 @@ ConnectionMorph >> drawOn: aCanvas [
 { #category : #drawing }
 ConnectionMorph >> drawSegmentedCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
 	| c bw bc |
-	c := isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self fillStyle].
+	c := isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self color ].
 	bw := self borderWidth.
 	bc := isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self borderColor].
 	bw > (self lineWidth / 2) 
@@ -783,7 +791,7 @@ ConnectionMorph >> drawSegmentedCurveOnAACanvas: aaCanvas canvas: aCanvas isShad
 ConnectionMorph >> drawSmoothCurveOnAACanvas: aaCanvas canvas: aCanvas isShadow: isShadow [ 
 	aaCanvas 
 		drawGeneralBezierShape: self contours
-		color: (isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self fillStyle])
+		color: (isShadow ifTrue: [aCanvas shadowColor] ifFalse: [self color ])
 		borderWidth: self borderWidth
 		borderColor: (isShadow 
 				ifTrue: [aCanvas shadowColor]
@@ -801,6 +809,18 @@ ConnectionMorph >> extent: newExtent [
 	safeExtent := newExtent max: 20@20.
 	self setVertices: (vertices collect:
 		[:p | p - center * (safeExtent asFloatPoint / (bounds extent max: 1@1)) + center])
+]
+
+{ #category : #accessing }
+ConnectionMorph >> fillStyle [
+	Transcript show: 'fillStyle';cr.
+	^ self color 
+]
+
+{ #category : #accessing }
+ConnectionMorph >> fillStyle: aColor [ 
+	Transcript show: 'fillStyle: ';cr.
+	^ self color: aColor .
 ]
 
 { #category : #accessing }
@@ -850,7 +870,7 @@ ConnectionMorph >> headConnectionPoint [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 ConnectionMorph >> headConnectionPointCenter [
 	^self headConnectionPoint center 
 ]
@@ -862,25 +882,22 @@ ConnectionMorph >> heading: newHeading [
 	self rotationDegrees: newHeading.
 ]
 
-{ #category : #'gaucho-created' }
+{ #category : #updating }
 ConnectionMorph >> iconsSpecsOnClick [
 	^ {'move'}
 ]
 
 { #category : #initialization }
-ConnectionMorph >> initialize [
+ConnectionMorph >> initializeWithVertices: verts lineWidth: w lineColor: c borderStyle: aBorderStyle [
 	connectionPoints := Array new:2.
 	smoothCurve := false.
 	submorphs := #().
 	bounds := 0@0 extent: 0@0.
-	self vertices: (Array 
-				with: 5 @ 0
-				with: 200 @ 100
-				with: 0 @ 200)
-			lineWidth: 2
-			lineColor: self defaultBackgroundColor  
-			borderStyle: self defaultBorderStyle  .
-	super initialize.
+	lineWidth := w.
+	borderWidth := aBorderStyle width .
+	borderColor := aBorderStyle color. 
+	color := c .
+	self vertices: verts.
 	self makeNoArrows.
 
 ]
@@ -945,15 +962,15 @@ ConnectionMorph >> lastVertex [
 	^vertices last
 ]
 
-{ #category : #'visual properties' }
+{ #category : #accessing }
 ConnectionMorph >> lineColor [
 
-	^self fillStyle
+	^self color
 ]
 
-{ #category : #'visual properties' }
+{ #category : #accessing }
 ConnectionMorph >> lineColor: newColor [
-	self fillStyle: newColor
+	self color: newColor
 
 ]
 
@@ -1432,13 +1449,13 @@ ConnectionMorph >> updateArrowContours [
 		put: (transform transformPoint: arrows second joinPoint)
 ]
 
-{ #category : #'gaucho-created' }
+{ #category : #updating }
 ConnectionMorph >> updateHeadVertex [
 	self verticesAt: vertices size put: self headConnectionPointCenter .
 
 ]
 
-{ #category : #'gaucho-created' }
+{ #category : #updating }
 ConnectionMorph >> updateTailVertex [
 	self verticesAt: 1 put: self tailConnectionPointCenter 
 ]
@@ -1470,23 +1487,6 @@ ConnectionMorph >> vertices [
 { #category : #accessing }
 ConnectionMorph >> vertices: anArray [ 
 	self setVertices: anArray .
-]
-
-{ #category : #initialization }
-ConnectionMorph >> vertices: verts color: aColor borderStyle: aBorderStyle [ 
-	lineWidth := aBorderStyle width .
-	self setVertices: verts.
-	self fillStyle: aColor.
-	self borderStyle: aBorderStyle 
-]
-
-{ #category : #initialization }
-ConnectionMorph >> vertices: verts lineWidth: w lineColor: aColor borderStyle: aBorderStyle [ 
-	lineWidth := w .
-	self setVertices: verts.
-	self fillStyle: aColor .
-	self borderStyle: aBorderStyle 
-
 ]
 
 { #category : #editing }
