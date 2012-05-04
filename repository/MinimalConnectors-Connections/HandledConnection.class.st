@@ -1,6 +1,6 @@
 Class {
-	#name : #HandledConnectionMorph,
-	#superclass : #ConnectionMorph,
+	#name : #HandledConnection,
+	#superclass : #Connection,
 	#instVars : [
 		'handles'
 	],
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #editing }
-HandledConnectionMorph >> addHandles [
+HandledConnection >> addHandles [
 	self addAllMorphs: self handles
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> click: event [ 
+HandledConnection >> click: event [ 
 	| clickedPosition clickedHandle endPointHandles headHandle tailHandle handleSpec handle epsilon |
 	event hand mouseFocus ~= self ifTrue:[ ^ self ].
 	clickedPosition := event position.
@@ -34,13 +34,13 @@ HandledConnectionMorph >> click: event [
 ]
 
 { #category : #'event handling' }
-HandledConnectionMorph >> dragHandleStarted: aConnectionHandle [ 
+HandledConnection >> dragHandleStarted: aConnectionHandle [ 
 	self fillStyle: Color lightGray .
 	
 ]
 
 { #category : #'event handling' }
-HandledConnectionMorph >> dragHandleStoped: aGMConnectionHandle [ 
+HandledConnection >> dragHandleStoped: aGMConnectionHandle [ 
 	| error |
 	self flag:'solo tenemos herencia por ahora...por eso lo hardcodeo'.
 	aGMConnectionHandle delete.
@@ -53,25 +53,25 @@ HandledConnectionMorph >> dragHandleStoped: aGMConnectionHandle [
 ]
 
 { #category : #accessing }
-HandledConnectionMorph >> endPointHandles [
+HandledConnection >> endPointHandles [
 	^ self valueOfProperty: #endPointHandles ifAbsentPut:[ #(nil nil)].
 ]
 
 { #category : #accessing }
-HandledConnectionMorph >> endPointHandles: twoHandlesSpecs [
+HandledConnection >> endPointHandles: twoHandlesSpecs [
 	self setProperty:#endPointHandles toValue: twoHandlesSpecs .
 	
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> handleForEvent: anEvent [ 
+HandledConnection >> handleForEvent: anEvent [ 
 	"Answer a NCCurveHandleMorph that can be used to adjust me at the 
 	given point."
 	^self handleForPosition: anEvent position addAllowed: anEvent shiftPressed
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> handleForPosition: pos addAllowed: canAddVertex [ 
+HandledConnection >> handleForPosition: pos addAllowed: canAddVertex [ 
 	"Answer a NCCurveHandleMorph that can be used to adjust me at the 
 	given point."
 
@@ -107,7 +107,7 @@ HandledConnectionMorph >> handleForPosition: pos addAllowed: canAddVertex [
 ]
 
 { #category : #arrows }
-HandledConnectionMorph >> handles [
+HandledConnection >> handles [
 	"Answer a collection of NCCurveHandleMorphs that can be used to adjust my vertices"
 	| handles |
 	handles := submorphs select: [ :ea | ea isCurveHandle ].
@@ -122,21 +122,27 @@ HandledConnectionMorph >> handles [
 		]
 ]
 
+{ #category : #'as yet unclassified' }
+HandledConnection >> initialize [
+	super initialize.
+	self connectionFactory: HandledConnectionFactory new.
+]
+
 { #category : #initialization }
-HandledConnectionMorph >> initializeInteraction [ 
+HandledConnection >> initializeInteraction [ 
 	self addInteraction .
 	self eventHandler addWindowKeyboardInteraction   .
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> interiorHandleForEvent: anEvent [ 
+HandledConnection >> interiorHandleForEvent: anEvent [ 
 	"Answer a NCCurveHandleMorph that can be used to adjust me at the 
 	given point."
 	^self interiorHandleForPosition: anEvent position addAllowed: anEvent shiftPressed
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> interiorHandleForPosition: pos addAllowed: canAddVertex [ 
+HandledConnection >> interiorHandleForPosition: pos addAllowed: canAddVertex [ 
 	| handle sel |
 	handle := self handleForPosition: pos addAllowed: canAddVertex.
 	sel := handle setPointSelector.
@@ -146,7 +152,7 @@ HandledConnectionMorph >> interiorHandleForPosition: pos addAllowed: canAddVerte
 ]
 
 { #category : #editing }
-HandledConnectionMorph >> removeHandles [
+HandledConnection >> removeHandles [
 	| handles |
 	handles := submorphs select: [ :ea | ea isCurveHandle ].
 	self removeAllMorphsIn:  handles.

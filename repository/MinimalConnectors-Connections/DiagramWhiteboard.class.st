@@ -44,7 +44,7 @@ DiagramWhiteboard >> diagramNodeMorphFor: aDiagramNodeDescription [
 
 { #category : #accessing }
 DiagramWhiteboard >> diagramNodeMorphs [
-	^ self diagramNodes collect:[:boxDesc | (self diagramNodeMorphFor: boxDesc) diagramNode: boxDesc  ]
+	^ self diagramNodes collect:[:boxDesc | (self diagramNodeMorphFor: boxDesc) "diagramNode: boxDesc"  ]
 ]
 
 { #category : #accessing }
