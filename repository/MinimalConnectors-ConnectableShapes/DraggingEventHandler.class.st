@@ -1,6 +1,6 @@
 Class {
 	#name : #DraggingEventHandler,
-	#superclass : #Object,
+	#superclass : #EventHandler,
 	#instVars : [
 		'passenger',
 		'desiredPoint',

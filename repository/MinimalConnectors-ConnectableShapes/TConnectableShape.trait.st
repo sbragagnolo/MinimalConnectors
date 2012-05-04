@@ -1,19 +1,19 @@
 Trait {
-	#name : #TConnectableMorph,
+	#name : #TConnectableShape,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> connectTo: anotherBox [ 
-	self connectTo: anotherBox using: ConnectionMorph defaultConnection
+TConnectableShape >> connectTo: anotherBox [ 
+	self connectTo: anotherBox using: Connection new
 
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> connectTo: anotherBox using: aConnection [
+TConnectableShape >> connectTo: anotherBox using: aConnection [
 	| origin destination |
-	origin := SingleConnectionPointMorph new.
-	destination := SingleConnectionPointMorph new.
+	origin := SingleConnectionPoint new.
+	destination := SingleConnectionPoint new.
 	self connectableBounds addConnectionPoint: origin thatConnectsTo: anotherBox.
 	anotherBox connectableBounds addConnectionPoint: destination thatConnectsTo:  self.
 	self connectableBounds changed.
@@ -27,45 +27,45 @@ TConnectableMorph >> connectTo: anotherBox using: aConnection [
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> connectableBounds [
+TConnectableShape >> connectableBounds [
 	"Each class using this trait should implement this method and very probably add an instance variable for storing a ConnectableBoundingBox instance"
 	self shouldBeImplemented 
 ]
 
 { #category : #accessing }
-TConnectableMorph >> connections [ 
+TConnectableShape >> connections [ 
 	^self connectableBounds connections 
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> handlesMouseDown: evt [
+TConnectableShape >> handlesMouseDown: evt [
 	^true
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> justDroppedInto: aMorph event: anEvent [
+TConnectableShape >> justDroppedInto: aMorph event: anEvent [
 	self diagramNode position: self position.
 	self owner updateRelationships.
 
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> mouseDown: evt [
+TConnectableShape >> mouseDown: evt [
 	self eventHandler mouseDown: evt
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> mouseMove: evt [
+TConnectableShape >> mouseMove: evt [
 	self eventHandler handleMove: evt.
 	
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> mouseUp: evt [
+TConnectableShape >> mouseUp: evt [
 	self eventHandler stopHandleDrag: evt.
 ]
 
 { #category : #'as yet unclassified' }
-TConnectableMorph >> wantsToBeDroppedInto: aMorph [
+TConnectableShape >> wantsToBeDroppedInto: aMorph [
 	^aMorph isKindOf: DiagramWhiteboard 
 ]

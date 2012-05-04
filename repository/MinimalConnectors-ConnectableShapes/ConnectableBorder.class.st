@@ -1,22 +1,22 @@
 Class {
-	#name : #ConnectableBorderMorph,
+	#name : #ConnectableBorder,
 	#superclass : #RectangleMorph,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 
 { #category : #'as yet unclassified' }
-ConnectableBorderMorph >> addConnectionPoint: aMorph [
+ConnectableBorder >> addConnectionPoint: aMorph [
 	self addMorph: aMorph.
 	self cellInset: (owner width / (self submorphs size +1)).
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBorderMorph >> connectionPoints [
+ConnectableBorder >> connectionPoints [
 	^self submorphs
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBorderMorph >> sortSubmorphsBy: aBlock [
+ConnectableBorder >> sortSubmorphsBy: aBlock [
 	"Sort the receiver's submorphs by the criterion indicated in the provided symbol"
 	|subs|
 	
@@ -27,11 +27,11 @@ ConnectableBorderMorph >> sortSubmorphsBy: aBlock [
 ]
 
 { #category : #updating }
-ConnectableBorderMorph >> updateConnections [
+ConnectableBorder >> updateConnections [
 	self connectionPoints do:[:point | point updateConnections .]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBorderMorph >> updateLayout [
+ConnectableBorder >> updateLayout [
 	self subclassResponsibility
 ]

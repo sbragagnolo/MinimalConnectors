@@ -1,11 +1,11 @@
 Class {
-	#name : #HorizontalConnectableBorderMorph,
-	#superclass : #ConnectableBorderMorph,
+	#name : #HorizontalConnectableBorder,
+	#superclass : #ConnectableBorder,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 
 { #category : #'as yet unclassified' }
-HorizontalConnectableBorderMorph >> initialize [ 
+HorizontalConnectableBorder >> initialize [ 
 	super initialize.
 	self 
 		color: Color transparent;
@@ -21,12 +21,12 @@ HorizontalConnectableBorderMorph >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-HorizontalConnectableBorderMorph >> updateLayout [
+HorizontalConnectableBorder >> updateLayout [
 	self width: owner width.
 ]
 
 { #category : #'as yet unclassified' }
-HorizontalConnectableBorderMorph >> updateView [ 
+HorizontalConnectableBorder >> updateView [ 
 "self haltIf:[submorphs size >= 2]."
 		
 	

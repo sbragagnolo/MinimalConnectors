@@ -3,7 +3,7 @@ A ConnectableBoundingBox is a bounding box with connection points for another mo
 
 "
 Class {
-	#name : #ConnectableBoundingBoxMorph,
+	#name : #ConnectableBoundingBox,
 	#superclass : #RectangleMorph,
 	#instVars : [
 		'borders'
@@ -12,24 +12,24 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
+ConnectableBoundingBox >> addConnectionPoint: aConnectionPoint thatConnectsTo: aShape [
 	(self connectionNear: aShape ) addConnectionPoint: aConnectionPoint .
 	 
 ]
 
 { #category : #borders }
-ConnectableBoundingBoxMorph >> borders [
+ConnectableBoundingBox >> borders [
 	^borders
 
 ]
 
 { #category : #borders }
-ConnectableBoundingBoxMorph >> bottomBorder [
+ConnectableBoundingBox >> bottomBorder [
 	^self borders at: 3 ifAbsentPut:[ self newHorizontalBorder].
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> connectionNear: anotherClassBox [
+ConnectableBoundingBox >> connectionNear: anotherClassBox [
 	self top > anotherClassBox bottom ifTrue:[^self  topBorder].
 	self bottom < anotherClassBox top ifTrue:[^self  bottomBorder].
 	self left > anotherClassBox right ifTrue:[^self  leftBorder].
@@ -38,27 +38,27 @@ ConnectableBoundingBoxMorph >> connectionNear: anotherClassBox [
 ]
 
 { #category : #'connection points' }
-ConnectableBoundingBoxMorph >> connectionPoints [
+ConnectableBoundingBox >> connectionPoints [
 	^self borders inject: OrderedCollection new into:[:points :border | points union: border submorphs ]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> connections [
-	^self submorphs select:[:sub | sub isKindOf: ConnectionMorph ]
+ConnectableBoundingBox >> connections [
+	^self submorphs select:[:sub | sub isKindOf: Connection ]
 ]
 
 { #category : #accessing }
-ConnectableBoundingBoxMorph >> defaultColor [
+ConnectableBoundingBox >> defaultColor [
 	^Color veryLightGray 
 ]
 
 { #category : #accessing }
-ConnectableBoundingBoxMorph >> delta [
+ConnectableBoundingBox >> delta [
 	^ 10
 ]
 
 { #category : #'connection points' }
-ConnectableBoundingBoxMorph >> initialize [ 
+ConnectableBoundingBox >> initialize [ 
 	super initialize.
 	borderColor := Color gray.
 	borders := OrderedCollection new.
@@ -71,48 +71,49 @@ ConnectableBoundingBoxMorph >> initialize [
 ]
 
 { #category : #borders }
-ConnectableBoundingBoxMorph >> leftBorder [
+ConnectableBoundingBox >> leftBorder [
 	^self borders at: 4 ifAbsentPut:[self newVerticalBorder].
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> newHorizontalBorder [
-	^ HorizontalConnectableBorderMorph new
+ConnectableBoundingBox >> newHorizontalBorder [
+	^ (HorizontalConnectableBorder new)
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> newVerticalBorder [
-	^ VerticalConnectableBorderMorph new 
+ConnectableBoundingBox >> newVerticalBorder [
+	^ (VerticalConnectableBorder new)
+	
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> noteNewOwner: aMorph [
+ConnectableBoundingBox >> noteNewOwner: aMorph [
 	self updateLayout
 		
 ]
 
 { #category : #updating }
-ConnectableBoundingBoxMorph >> resetConnectionPoints [
+ConnectableBoundingBox >> resetConnectionPoints [
 	self borders do: #removeAllMorphs 
 ]
 
 { #category : #borders }
-ConnectableBoundingBoxMorph >> rightBorder [
+ConnectableBoundingBox >> rightBorder [
 	^self borders at: 2 ifAbsentPut:[self newVerticalBorder].
 ]
 
 { #category : #borders }
-ConnectableBoundingBoxMorph >> topBorder [
+ConnectableBoundingBox >> topBorder [
 	^self borders at: 1 ifAbsentPut:[self newHorizontalBorder].
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> updateConnections [
+ConnectableBoundingBox >> updateConnections [
 	self borders do:[:border | border updateConnections]
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> updateLayout [
+ConnectableBoundingBox >> updateLayout [
 	self bounds: owner bounds.
 	self borders do: #updateLayout.
 	
@@ -126,7 +127,7 @@ ConnectableBoundingBoxMorph >> updateLayout [
 ]
 
 { #category : #'as yet unclassified' }
-ConnectableBoundingBoxMorph >> updateView [
+ConnectableBoundingBox >> updateView [
 	self borders do: #updateView
 
 
