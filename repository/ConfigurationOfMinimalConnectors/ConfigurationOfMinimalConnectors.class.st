@@ -116,6 +116,15 @@ ConfigurationOfMinimalConnectors >> project [
 		project ]
 ]
 
+{ #category : #nil }
+ConfigurationOfMinimalConnectors >> stable: spec [  
+	<symbolicVersion: #stable>
+	
+	spec for: #'pharo1.2.x' version: '0.6'.
+	spec for: #'pharo1.3.x' version: '0.6'.
+	spec for: #'pharo1.4.x' version: '0.7'.
+]
+
 { #category : #versions }
 ConfigurationOfMinimalConnectors >> version01: spec [
 	<version: '0.1' imports: #('0.1-baseline')>
@@ -191,5 +200,18 @@ ConfigurationOfMinimalConnectors >> version06: spec [
 				blessing: #release;
 				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.18';
 				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.8']
+]
+
+{ #category : #versions }
+ConfigurationOfMinimalConnectors >> version07: spec [
+	<version: '0.7' imports: #('0.1-baseline')>
+	spec
+		for: #common
+		do: [ 
+			spec
+				blessing: #release;
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.20';
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.9';
 				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.8']
 ]
