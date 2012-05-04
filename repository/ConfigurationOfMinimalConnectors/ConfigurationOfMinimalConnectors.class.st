@@ -212,6 +212,6 @@ ConfigurationOfMinimalConnectors >> version07: spec [
 			spec
 				blessing: #release;
 				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.20';
-				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.9';
-				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.8']
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.9']
 ]
