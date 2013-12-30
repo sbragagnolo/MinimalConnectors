@@ -1,6 +1,6 @@
 Class {
 	#name : #ConnectableBorder,
-	#superclass : #RectangleMorph,
+	#superclass : #Morph,
 	#category : #'MinimalConnectors-ConnectableShapes'
 }
 

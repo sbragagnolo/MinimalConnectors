@@ -4,7 +4,7 @@ A ConnectableBoundingBox is a bounding box with connection points for another mo
 "
 Class {
 	#name : #ConnectableBoundingBox,
-	#superclass : #RectangleMorph,
+	#superclass : #BorderedMorph,
 	#instVars : [
 		'borders'
 	],
