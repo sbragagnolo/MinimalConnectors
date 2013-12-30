@@ -92,7 +92,7 @@ ConfigurationOfMinimalConnectors >> baseline01: spec [
 	
 	spec for: #common do: [
 		spec blessing: #baseline.
-		spec repository: 'http://www.squeaksource.com/MinimalConnectors'.	
+		spec repository: 'http://www.smalltalkhub.com/mc/Uqbar/MinimalConnectors/main'.	
 		spec 
 			package: 'MinimalConnectors-ConnectableShapes';
 			package: 'MinimalConnectors-CurvesAndArrows';
@@ -116,7 +116,7 @@ ConfigurationOfMinimalConnectors >> project [
 		project ]
 ]
 
-{ #category : #nil }
+{ #category : #'symbolic versions' }
 ConfigurationOfMinimalConnectors >> stable: spec [  
 	<symbolicVersion: #stable>
 	
@@ -225,6 +225,19 @@ ConfigurationOfMinimalConnectors >> version08: spec [
 			spec
 				blessing: #release;
 				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-carlaGriggio.20';
+				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
+				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.10']
+]
+
+{ #category : #versions }
+ConfigurationOfMinimalConnectors >> version09: spec [
+	<version: '0.9' imports: #('0.1-baseline')>
+	spec
+		for: #common
+		do: [ 
+			spec
+				blessing: #release;
+				package: 'MinimalConnectors-ConnectableShapes' with:'MinimalConnectors-ConnectableShapes-GuillermoPolito.21';
 				package: 'MinimalConnectors-CurvesAndArrows' with: 'MinimalConnectors-CurvesAndArrows-carlaGriggio.8';
 				package: 'MinimalConnectors-Connections' with: 'MinimalConnectors-Connections-carlaGriggio.10']
 ]
