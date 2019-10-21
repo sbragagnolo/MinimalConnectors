@@ -6,7 +6,7 @@ Class {
 
 { #category : #baselines }
 BaselineOfMinimalConnectors >> baseline: spec [
-	<bsaaeline>
+	<baseline>
 	spec
 		for: #common
 		do: [ spec
